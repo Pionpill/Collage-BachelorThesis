@@ -1,0 +1,161 @@
+\section{系统测试}
+
+软件测试，测是验证软件功能、性能；试是验证软件是否有非功能性的异常。软件测试是软件开发必不可少的过程，目的是不断优化软件系统，让软件更加的完善。
+
+\subsection{测试环境}
+
+硬件环境:
+\begin{itemize}
+  \item 服务器: 本机服务器(4核8线程，24GB，10M贷款，100G 硬盘);
+  \item 移动设备: 安卓手机(Snapdragon 885 处理器, Android 11 操作系统);
+\end{itemize}
+
+软件环境:
+\begin{itemize}
+  \item 数据库: MySQL 8.0;
+  \item Java: JDK17;
+  \item 浏览器: Chroe112(移动版)。
+\end{itemize}
+
+\subsection{功能测试}
+
+\subsubsection{用户认证模块测试}
+
+用户认证模块的功能包括用户登录，用户注册，用户信息增改。测试用例和结果如表\ref{table:用户认证模块测试用例表}所示:
+
+\begin{table}[H]
+  \centering
+  \small
+  \renewcommand\arraystretch{1.1}
+  \caption{用户认证模块测试用例表}
+  \label{table:用户认证模块测试用例表}
+  \setlength{\tabcolsep}{4mm}
+  \begin{tabular}{|p{4.5cm}|p{6.5cm}|p{1.5cm}|}
+    \hline \textbf{功能描述} & \multicolumn{2}{l|}{用户登录，注册，信息修改} \\
+    \hline \textbf{用例目的} & \multicolumn{2}{l|}{测试模块功能的可用性} \\
+    \hline \textbf{前提条件} & \multicolumn{2}{l|}{用户时校园教职工或学生，在校园数据表中有记录} \\
+    \hline \textbf{输出/动作} & \textbf{期望的输出/响应} & \textbf{实际情况} \\
+    \hline 进入登录界面，在表单中输入用户名或邮箱以及密码。点击登录按钮。 & 前端对输入数据进行判断，根据字符关键字判断是用户名还是密码。对用户名/邮箱和密码进行格式校验。若失败，前端给出提示。若成功将数据发送到后端验证，若后端验证失败，则前端界面显示对应信息，若成功，则跳转至系统主页面。 & 符合  \\
+    \hline 进入注册界面，在表单中输入工号/学号，密码等必填信息；选择性填入可填信息。点击注册按钮。 & 前端对输入数据进行格式判断。若失败，前端给出提示。若成功将数据发送到后端验证，后端查询学校用户表，根据 id 匹配注册信息，若后端验证失败，则前端界面显示对应信息，若成功，则跳转至登录页面。 & 符合  \\
+    \hline 登录账户后，在``我的''界面修改个人信息，点击提交按钮。 & 前端对输入数据进行格式判断。若失败，前端给出提示。若成功将数据发送到后端验证，后端将数据存储到对应表格，若失败，前端给出错误原因，若成功，更新用户信息。 & 符合  \\
+    \hline 在登录时，勾选 ``记住我'' 选项。 & 退出系统后，在一周内登录系统无需手动登录，系统自动跳转至 ``我的'' 界面。 & 符合  \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsubsection{数据推送模块测试}
+
+数据推送模块的功能包括模型推送与模型查询。测试用例和结果如表\ref{table:数据推送模块测试用例表}所示:
+
+\begin{table}[H]
+  \centering
+  \small
+  \renewcommand\arraystretch{1.1}
+  \caption{数据推送模块测试用例表}
+  \label{table:数据推送模块测试用例表}
+  \setlength{\tabcolsep}{4mm}
+  \begin{tabular}{|p{4.5cm}|p{6.5cm}|p{1.5cm}|}
+    \hline \textbf{功能描述} & \multicolumn{2}{l|}{模型推送，模型查询} \\
+    \hline \textbf{用例目的} & \multicolumn{2}{l|}{测试模块功能的可用性} \\
+    \hline \textbf{前提条件} & \multicolumn{2}{l|}{用户进入系统} \\
+    \hline \textbf{输出/动作} & \textbf{期望的输出/响应} & \textbf{实际情况} \\
+    \hline 进入主页界面，选择分区: “为你推荐”, “最新更新”, “我的关注”。 & 前端将对应类型传输到后端，后端根据类型选择不同算法，分别采用后端三种不同的算法: 点赞数较高模型，最新更新模型，用户关注作者模型。返回数据在前端显示。 & 符合  \\
+    \hline 进入主页界面，在搜索框输入模型名称，点击搜索图标。 & 前端对搜索格式进行检测，若不符合要求则给出提示信息。若符合则后端根据搜索内容查模型表模型名称，然后返回查询到的结果数据到前端能显示。 & 符合  \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsubsection{数据上传模块测试}
+
+数据上传模块的功能包括模型上传与AR标记上传。测试用例和结果如表\ref{table:数据上传模块测试用例表}所示:
+
+\begin{table}[H]
+  \centering
+  \small
+  \renewcommand\arraystretch{1.1}
+  \caption{数据上传模块测试用例表}
+  \label{table:数据上传模块测试用例表}
+  \setlength{\tabcolsep}{4mm}
+  \begin{tabular}{|p{4.5cm}|p{6.5cm}|p{1.5cm}|}
+    \hline \textbf{功能描述} & \multicolumn{2}{l|}{模型上传，AR标记上传} \\
+    \hline \textbf{用例目的} & \multicolumn{2}{l|}{测试模块功能的可用性} \\
+    \hline \textbf{前提条件} & \multicolumn{2}{l|}{用户进入系统} \\
+    \hline \textbf{输出/动作} & \textbf{期望的输出/响应} & \textbf{实际情况} \\
+    \hline 进入上传界面，选择模型上传。在表格中填入模型 URL 等必要信息；选择性填入可选信息。点击上传按钮 & 前端对输入数据进行格式判断，对模型 URL 有效性检查。若检查失败，前端给出提示。若成功将数据发送到后端存储，后端检查是否存在相同数据，若存在返回错误信息，若存储成功，前端给出成功提示。 & 符合  \\
+    \hline 进入上传界面，选择AR标记上传。在表格中填入标记 URL，标记类型等必要信息；选择性填入可选信息。点击上传按钮 & 前端对输入数据进行格式判断，对标记 URL 有效性检查。若检查失败，前端给出提示。若成功将数据发送到后端存储，后端检查是否存在相同数据，若存在返回错误信息，若成功，分别将数据存储到标记表，标记信息表。存储完成后前端给出成功提示。 & 符合  \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsubsection{WebGL 模块测试}
+
+WebGL 模块的功能包括模型显示，模型控制功能。测试用例和结果如表\ref{table:WebGL 模块测试用例表}所示:
+
+\begin{table}[H]
+  \centering
+  \small
+  \renewcommand\arraystretch{1.1}
+  \caption{WebGL 模块测试用例表}
+  \label{table:WebGL 模块测试用例表}
+  \setlength{\tabcolsep}{4mm}
+  \begin{tabular}{|p{4.5cm}|p{6.5cm}|p{1.5cm}|}
+    \hline \textbf{功能描述} & \multicolumn{2}{l|}{模型显示，模型控制} \\
+    \hline \textbf{用例目的} & \multicolumn{2}{l|}{测试模块功能的可用性} \\
+    \hline \textbf{前提条件} & \multicolumn{2}{l|}{用户进入系统} \\
+    \hline \textbf{输出/动作} & \textbf{期望的输出/响应} & \textbf{实际情况} \\
+    \hline 进入模型预览界面，查看某个模型。 & 后端将模型信息，控制信息，环境信息等传输到前端。前端异步加载环境，模型，模型信息。用户可通过按钮切换模型摘要或模型详情模式，也可隐藏非必要卡片。 & 符合  \\
+    \hline 进入模型预览界面，通过触摸操作模型，通过控制板调整数据操作模型。 & 根据用户操作，模型做出移动，缩放等响应。通过控制板的操作，场景将更换对应配置或显示新的场景。 & 符合  \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsubsection{AR 模块测试}
+
+AR 模块的功能包括AR模型预览，AR识别功能。其中 AR 识别分为图像识别与标记捕捉。测试用例和结果如表\ref{table:AR模块测试用例表}所示:
+
+\begin{table}[H]
+  \centering
+  \small
+  \renewcommand\arraystretch{1.1}
+  \caption{AR模块测试用例表}
+  \label{table:AR模块测试用例表}
+  \setlength{\tabcolsep}{4mm}
+  \begin{tabular}{|p{4.5cm}|p{6.5cm}|p{1.5cm}|}
+    \hline \textbf{功能描述} & \multicolumn{2}{l|}{AR预览，AR识别} \\
+    \hline \textbf{用例目的} & \multicolumn{2}{l|}{测试模块功能的可用性} \\
+    \hline \textbf{前提条件} & \multicolumn{2}{l|}{用户进入系统} \\
+    \hline \textbf{输出/动作} & \textbf{期望的输出/响应} & \textbf{实际情况} \\
+    \hline 进入AR预览界面，通过摄像头在虚拟现实场景中显示模型。 & 系统获取摄像头权限并显示现实场景。将虚拟物体模型投射到真实场景中提供预览功能。 & 符合  \\
+    \hline 进入AR预览界面，通过操纵轴触摸操作模型位置，控制模型进行旋转。 & 模型根据用户触摸操作做出响应，对应位置或旋转信息改变并显示在界面上。 & 符合  \\
+    \hline 进入AR预览界面，通过控制板改变模型或场景信息。 & 模型或场景根据改变的信息实时应用，并显示在界面上。 & 符合  \\
+    \hline 进入AR识别界面，摄像头对准可识别的图像，等待系统响应。 & 系统匹配到图像信息后，如果存在预定义的 3D 模型，则显示在界面上；如果存在标记信息，则界面弹出简要标记卡片。 & 符合  \\
+    \hline 进入AR识别界面，摄像头对准可识别的标记，等待系统响应。 & 系统匹配到标记信息后，如果存在预定义的 3D 模型，则显示在界面上；如果存在标记信息，则界面弹出简要标记卡片。 & 符合  \\
+    \hline 弹出简要标记卡片后点击查看详细信息。 & 系统弹出详细信息卡，同时停止图像识别功能，在关系信息卡后重新进行图像识别。 & 符合  \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsection{性能测试}
+
+在性能测试过程中，针对需求分析中的非功能需求，对系统进行性能测试。具体测试方法为采用测试设备对系统各个功能接口同时进行测试，单个接口的测试量为 20 次，同类接口总体测试量大于 100，获得测试结果后取平均响应时间。测试用例和结果如表\ref{table:性能测试表}所示。
+
+\begin{table}[H]
+  \centering
+  \small
+  \renewcommand\arraystretch{1.1}
+  \caption{性能测试表}
+  \label{table:性能测试表}
+  \setlength{\tabcolsep}{4mm}
+  \begin{tabular}{|p{4.5cm}|p{4cm}|p{4cm}|}
+    \hline \textbf{输入动作} & \textbf{期望的输出/响应} & \textbf{实际情况} \\
+    \hline 切换系统界面 & 平均响应时间 <1s & 平均响应时间 <0.5s  \\
+    \hline 点击按钮，弹出弹框并显示内容 & 平均响应时间 <1s & 平均响应时间 <0.5s  \\
+    \hline 主页选择不同数据分析，等待返回内容 & 平均响应时间 <2s & 平均响应时间 <1.5s  \\
+    \hline 主页搜索模型，等待返回内容 & 平均响应时间 <2s & 平均响应时间 <2s  \\
+    \hline 模型预览界面加载场景，并开始异步加载模型 & 平均响应时间 <2s & 平均响应时间 <1s  \\
+    \hline AR 预览界面开启摄像头，开始异步加载模型 & 平均响应时间 <2s & 平均响应时间 <1s  \\
+    \hline AR 识别界面开启识别图像信息 & 平均响应时间 <2s & 平均响应时间 <1.5s  \\
+    \hline AR 识别界面开启识别标记信息 & 平均响应时间 <1.5s & 平均响应时间 <1s  \\
+    \hline
+  \end{tabular}
+\end{table}

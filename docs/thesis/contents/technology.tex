@@ -1,0 +1,132 @@
+\section{技术与方法}
+
+\subsection{基础技术方案}
+
+系统采用 B/S 架构，即 ``浏览器/服务器'' 模式，核心功能在浏览器端，服务器端仅提供必要的数据。
+
+\subsubsection{前端}
+
+前端采用如下技术方案:
+
+\begin{itemize}
+  \item TypeScript: 为 JavaScript 提供了类型扩展，有助于系统的维护与稳定开发。系统采用 ES6(ECMAScript) 语法编写。
+  \item React: 前端应用整体框架，采用 React18+ 的 hooks 写法，所有组件均使用 JSX 语法编写。
+  \item Redux: 状态管理框架，统一管理公共数据，通过发布订阅模式在各个 React 组件中响应用户操作。
+  \item Material UI: 一套动画丰富，适合响应式应用的 UI 库，设计上遵循 Google 公司提出的 Material Design。
+  \item fetch: 用于访问和操纵 HTTP 的请求和响应等。ES6 新增的 API，用于替代传统以 HttpRequest 为基础的 ajax 请求。
+\end{itemize}
+
+系统的整体架构如图\ref{fig:系统整体架构}所示:
+
+\begin{figure}[H]
+  \small
+  \centering
+  \begin{tikzpicture}[font=\small]
+    \begin{scope}
+      \node [block, fill=orange!60, minimum width=3cm, minimum height=2cm] at (0,0) {};
+      \node at (0,0.5) {React 组件};
+      \node [font=\footnotesize] at (0,0) {语法: TypeScript};
+      \node [font=\footnotesize] at (0,-0.3) {骨架: React};
+      \node [font=\footnotesize] at (0,-0.6) {UI: MaterialUI};
+    \end{scope}
+    \draw [dashed, color=black!60] (2,-1.5) -- (2,1.5);
+    \begin{scope}[xshift=3cm]
+      \draw [dashed, color=black!60] (5,-1.5) -- (5,1.5);
+      \node [block, color=white, fill=orange] at (2.5,1) (react1) {React 组件};
+      \node [block, color=white, fill=orange] at (2.5,0) (react2) {React 组件};
+      \node [block, color=white, fill=orange] at (2.5,-1) (react3) {React 组件};
+      \node [block, color=white, fill=blue!60] at (0,0) (redux) {Redux};
+      \draw [Stealth-Stealth] (react1) -- (redux);
+      \draw [Stealth-Stealth] (react2) -- (redux);
+      \draw [Stealth-Stealth] (react3) -- (redux);
+      \node [block, color=white, fill=blue!60] at (5,0) (fetch) {fetch};
+      \draw [-Stealth] (react1) -- (fetch);
+      \draw [-Stealth] (react2) -- (fetch);
+      \draw [-Stealth] (react3) -- (fetch);
+      \node [block, color=white, fill=red] at (7.5,0.5) (back) {后端};
+      \node [block, color=white, fill=red] at (7.5,-0.5) (cos) {COS};
+      \draw [-Stealth] (fetch) -- (back);
+      \draw [-Stealth] (fetch) -- (cos) ;
+    \end{scope}
+  \end{tikzpicture}
+  \caption{系统整体架构}
+  \label{fig:系统整体架构}
+\end{figure}
+
+\subsubsection{后端}
+
+后端采用如下技术方案:
+\begin{itemize}
+  \item SpringBoot: Java 后端主流企业级框架。整合了 Spring 框架的快速开发工具，Spring 生态的组多组件均可以在 SpringBoot 框架内快速应用。
+  \item Spring Data Jpa: SpringBoot 框架主流的全 ORM 数据库操作框架。提供了简单易用的 API，可以让开发者更加方便地使用 JPA 实现对数据库的操作。
+  \item MySQL: 开源免费的主流关系型数据库，适合存储常规数据段。
+  \item COS(对象存储): 对象存储服务将数据作为对象进行管理。本系统将图像识别，标记捕捉的数据以及模型数据放入对象存储桶中，前端通过 fetch 调用对应数据。
+\end{itemize}
+
+\subsection{核心技术方案}
+
+系统核心技术为 WebGL 与 AR，对应使用的技术框架为 three.js 与 ar.js。
+
+\subsubsection{WebGL}
+
+WebGL（Web Graphics Library）是一种用于在Web浏览器中呈现交互式3D图形的技术。它是JavaScript API（应用程序编程接口）的一种实现，可以与HTML5一起使用，让开发者能够在网页中使用3D图形，而无需使用插件或其他额外的软件。WebGL 是基于OpenGL ES（OpenGL for Embedded Systems）的API，因此它提供了与 OpenGL 相似的功能和语法。它允许开发者使用 JavaScript 代码来创建复杂的3D场景，包括模型、纹理、光照、阴影和动画等效果。\cite{cantor2012webgl}
+
+WebGL 与 OpenGL 都是一种技术协议，在具体应用上，系统采用了 three.js 框架。three.js 是一个基于 WebGL 的 JavaScript 3D 库，提供了一组易于使用的 API，可以处理 3D 对象、材质、光照和阴影等，还有许多其他功能，如动画、粒子效果、3D 文字、后期处理等。同时它也提供了部分 ar 功能，具体来说，three.js 中有一个 AR.js 库，它是基于 three.js 的一个开源项目，专门用于在网页上构建 AR 应用程序。不过 three.js 内置的 AR 库功能有限，无法准确地通过摄像头数据进行场景识别。
+
+由于本系统采用 React 作为主要框架，因此使用 @react-three 项目下的 @react-three/fiber, @react-three/drei, @react-three/xr 组件，该组件对 three.js 进一步封装，允许调用者在 React 框架内使用 JSX 语法实现 three.js 项目。这三个主要组件功能如下:
+\begin{itemize}
+  \item @react-three/fiber: 核心组件，将 three.js 封装为 JSX 组件。
+  \item @react-three/drei: 提供一些默认预设样式。
+  \item @react-three/xr: 实现 three.js 自带的 AR 功能。
+\end{itemize}
+
+WebGL 相关技术的关系如图所示:
+
+\begin{figure}[H]
+  \small
+  \centering
+  \begin{tikzpicture}[font=\small]
+    \node [block, color=white, fill=red] (OpenGL) at (0,0) {OpenGL};
+    \node [color=black!40, font=\footnotesize] at (0,-0.75) {底层图形协议};
+    \node [block, color=white, fill=red!80] (WebGL) at (3,0) {WebGL};
+    \node [color=black!40, font=\footnotesize] at (3,-0.75) {浏览器图形协议};
+    \node at (3.75,1) {协议};
+    \draw [dashed, color=black!60] (4.5, -1.5) -- (4.5, 1.5);
+    \node at (5.25,1) {应用包};
+    \node [block, color=white, fill=orange] (three) at (6,0) {three.js};
+    \node [color=black!40, font=\footnotesize] at (6,-0.75) {主流应用包};
+    \node [block, color=white, fill=blue!80] (@react-three) at (9,0) {@react-three};
+    \node [color=black!40, font=\footnotesize] at (9,-0.75) {react 生态应用包};
+    \node [block, color=white, fill=blue!60, font=\footnotesize] (fiber) at (12,0) {@react-three/fiber};
+    \node [block, color=white, fill=blue!60, font=\footnotesize] (drei) at (12,1) {@react-three/drei};
+    \node [block, color=white, fill=blue!60, font=\footnotesize] (xr) at (12,-1) {@react-three/xr};
+    \draw (@react-three) -- (fiber);
+    \draw (@react-three) -- (drei);
+    \draw (@react-three) -- (xr);
+    \draw [-Stealth] (OpenGL) -- (WebGL);
+    \draw [-Stealth] (WebGL) -- (three);
+    \draw [-Stealth] (three) -- (@react-three);
+  \end{tikzpicture}
+  \caption{OpenGL, WebGL, three.js, @react-three 关系}
+  \label{fig:WebGL 技术}
+\end{figure}
+
+\subsubsection{AR}
+
+虽然 three.js 本身内置一定的 AR 功能，但无法准确高效识别现实信息。因此本系统引入了 AR.js 包。AR.js 基于 WebRTC 和 WebGL 技术，并使用了三种主要的跟踪方式：基于位置的跟踪、基于图像的跟踪和基于标记的跟踪。由于基于位置的跟踪需要使用 AFrame 包，而 AFrame 包已经多年未更新，因此本系统并没有实现位置跟踪功能。
+
+WebRTC（Web Real-Time Communications）是一种开放的网络技术标准，它允许在网页浏览器之间进行实时音视频通信和数据传输。WebRTC 的目标是让网页应用程序能够通过简单的 JavaScript API 实现高质量的实时通信，而不需要安装任何插件或额外的软件。
+
+图像追踪是一种基于计算机视觉的 AR 跟踪技术，它使用摄像头捕捉到的图像来寻找预先定义好的目标图像，然后根据目标图像的位置和姿态来在实时视频中渲染虚拟对象。AR.js 中的图像追踪技术可以用于识别和追踪平面上的图像。
+
+标记追踪是一种基于二维码或其他特定图案的 AR 跟踪技术，它可以通过扫描预先定义好的二维码或标记图案来确定虚拟对象的位置和姿态。在 AR.js 中，我们可以使用 ArMarkerControls 来进行标记追踪，该控件使用了 jsartoolkit5 库来实现二维码的识别和跟踪。AR.js 支持的标记类型包括 Hiro、Kanji、Barcode 和 Custom Marker 等，开发者可以根据需求选择不同的标记类型。同时，AR.js 还支持在标记上显示虚拟对象和交互元素，以实现更加丰富和交互性的 AR 内容。
+
+\subsection{开发工具}
+
+本系统使用的主要开发 IDE(集成开发系统) 为 Visual Studio Code，使用的设备为本人的手机，对应的开发环境与设备参数如下:
+\begin{itemize}
+  \item 操作系统: Window11 22H2
+  \item IDE: Visual Studio Code 1.77.3
+  \item 设备: Snapdragon 885(处理器), Android 11
+  \item 浏览器: Chrome 112.0(移动版)
+\end{itemize}

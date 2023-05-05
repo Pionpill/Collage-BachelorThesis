@@ -1,0 +1,11 @@
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex*
+*.toc
+*.xdv
+
+~$*
+out/

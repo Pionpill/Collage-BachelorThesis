@@ -1,0 +1,58 @@
+% !TeX program  = XeLaTeX
+% !TeX encoding = UTF-8
+\documentclass[a4paper]{nuist}
+
+\begin{document}
+
+\cover{基于 WebGL 的 AR 校园交互系统}
+{吴鼎}{201983290194}{软件学院}{软件工程}{余文斌}{二Ｏ二三\hspace{0.4em} 年\hspace{0.4em} 五\hspace{0.4em} 月\hspace{0.4em} 一\hspace{0.4em} 日}
+
+\mytableofcontents
+
+\input{contents/style.tex}
+\input{contents/abstract.tex}
+\pagenumbering{arabic}
+\input{contents/introduction.tex}
+\input{contents/technology.tex}
+\input{contents/analysis.tex}
+\input{contents/design.tex}
+\input{contents/implementation.tex}
+\input{contents/test.tex}
+\input{contents/conclusion.tex}
+
+
+%%%%%%%%%% 封面目录摘要 %%%%%%%%%%
+
+%%%%%%%%%% 正文 %%%%%%%%%%
+% TIPS: 可以为每一章节在 body 文件夹内创建一个 .tex 文件，并以下述方式引入，也可以直接写在本文件中（不推荐）
+% \input{body/intro.tex}
+% \input{body/nuistcommand.tex}
+% \input{body/math.tex}
+% \input{body/figs.tex}
+% \input{body/table.tex}
+% \input{body/code.tex}
+% \input{body/ref.tex}
+%%%%%%%%%% 正文 %%%%%%%%%%
+
+%%%%%%%%%% 参考文献 %%%%%%%%%%
+\bibliography{bibliography}
+\clearpage % 输出所有剩余的浮动体（图片、表格等），另起一页
+%%%%%%%%%% 参考文献 %%%%%%%%%%
+
+%%%%%%%%%% 附录（可选） %%%%%%%%%%
+% \input{body/appendix.tex}
+%%%%%%%%%% 附录（可选） %%%%%%%%%%
+
+%%%%%%%%%% 致谢 %%%%%%%%%%
+% TIPS: \thanking 命令中包含了 \clearpage
+\thanking
+{
+    时光白驹过隙，我在南信大已经学习了四年，在这段学习生涯中，我要向我的母校表达最深切的谢意，感谢学校在我大学期间为我提供的一流教育资源和培养机会。在这里，我不仅仅获得了专业知识和技能，还收获了友情和人生经验。
+
+    其次，我要感谢我的导师对我的指导和支持。导师的悉心教诲和鼓励，对我完成毕业设计起到了至关重要的作用。导师不仅仅在学术研究方面给予我指导，还关心我的个人成长和发展，给了我很多宝贵的建议和启示。
+    
+    最后，我要感谢所有在我大学四年期间给予我帮助和支持的人。我的家人、朋友和同学们一直陪伴着我，给予我鼓励和支持。在这里，我要向你们表达最真挚的谢意和感激之情。
+}
+%%%%%%%%%% 致谢 %%%%%%%%%%
+
+\end{document}

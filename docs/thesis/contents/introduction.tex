@@ -1,0 +1,103 @@
+\section{绪论}
+\subsection{研究背景和意义}
+
+AR，即增强现实技术，是虚拟影像和现实影像的融合。AR 技术最早的应用可以追述到2009年2月的TED大会上，帕蒂•梅斯和普拉纳夫•米斯特莱展示了他们研发的AR系统SixthSense\cite{SixthSense}。该系统依靠常见的一些基本元件: 摄像头、小型投影仪、智能手机和镜子。首先摄像头和传感器采集真实场景的视频或者图像，传入后台的处理单元对其进行分析和重构，并结合头部跟踪设备的数据来分析虚拟场景和真实场景的相对位置，实现坐标系的对齐并进行虚拟场景的融合计算；交互设备采集外部控制信号，实现对虚实结合场景的交互操作。系统融合后的信息会实时地显示在显示器中，展现在人的视野中。
+
+AR 具有虚拟现实融合、实时交互、三维注册三大特征。实现 AR 技术的核心即通过技术手段实现三大特征对应的功能:
+\begin{itemize}
+  \item 现实融合: 需要一套高效的系统或算法完成对现实世界的识别。
+  \item 三维注册: 需要一套三维显示技术，并且提供交互功能。
+  \item 实时交互: 依赖于高性能的硬件设备。
+\end{itemize}
+
+除了高性能硬件无法通过编程手段实现，上述另外两大功能已有对应的解决方案，其中包括: 3D 图形显示技术，现实世界识别技术。目前比较主流的图形 API 包括 Direct3D, OpenGL, Vulkan, Metal。而现实世界识别主要依赖于图像识别算法，标记捕捉算法或地理定位系统。目前最为主流的应用级 AR 实现方案有基于 Unity3D 的 ARFoundation 系统，该系统通过调用 ARCore SDK 调用底层 Android 设备的 AR 服务实现 AR 功能\cite{ARFoundation}。苹果系统则使用 ARKit SDK 调用 iOS 设备底层服务实现 AR 功能。
+
+在 WebGL 领域，以 Three.js 为代表的 WebGL 技术也正出于蓬勃发展期，WebGL 是对 OpenGL 的封装，基于 WebGL 协议进行开发可以屏蔽底层复杂的图形逻辑而关注于浏览器端实现，实现 WebGL 协议的应用级框架有 Three.js。WebGL通过使用GPU硬件加速，可以在Web浏览器中实现高性能的3D图形渲染。GPU的并行处理能力使得WebGL能够同时渲染多个物体，实现更快的图形渲染。
+
+当今社会，虚拟现实和增强现实技术被广泛应用于各种领域，例如游戏、教育、医疗和工业等。其中，增强现实技术为用户提供了一种融合虚拟和现实世界的体验，这使得用户可以在实际场景中与虚拟对象进行交互。在增强现实中，AR 交互系统是实现用户与虚拟对象交互的关键技术之一。而利用 WebGL 技术实现 AR 交互系统则具有以下研究意义：
+
+\begin{itemize}
+  \item 与其他 AR 技术相比，WebGL 是一种基于 Web 标准的技术，可以在不需要任何插件或软件的情况下在 Web 浏览器中运行，极大地方便了用户的使用。
+  \item 由于 WebGL 技术采用 GPU 进行图形渲染，可以实现高质量的图形渲染和流畅的动画效果，这对于增强现实中需要呈现逼真虚拟对象的应用场景非常重要。
+  \item 在 AR 交互系统中，用户与虚拟对象的交互往往需要实时响应，而 WebGL 技术的高效性可以保证系统的实时性能，从而提升用户体验。
+  \item 通过使用 WebGL 技术，可以实现基于 Web 的跨平台应用，使得用户可以在不同的设备上使用相同的 AR 交互系统，极大地扩展了系统的应用范围。
+\end{itemize}
+
+\subsection{研究现状}
+
+目前以 ARFoundation 为代表的已有的成熟 AR 实现方案依赖于其背后公司独有的闭源技术，或者需要昂贵的专业 AR 设备。随着浏览器的高速发展以及智能手机的快速迭代，仅通过智能手机浏览器调用操作系统底层 AR 服务的技术方案成为可能\cite{ARMobile}。且浏览器服务拥有跨平台，兼容性强，生态丰富，无需额外设备等优点。
+
+目前已有许多研究者或工程师尝试使用 WebGL 技术实现 AR 功能，主流技术方案如下:
+\begin{itemize}
+  \item WebGL 框架：WebGL技术可以实现高质量的图形渲染和流畅的动画效果，可以实现逼真的虚拟物体呈现。例如，可以使用 Three.js 框架实现虚拟人物、虚拟建筑等的呈现。
+  \item AR 引擎：目前已经有许多AR引擎采用WebGL技术实现，如AR.js、Three.js、Awe.js、jsartoolkit5等。这些引擎通过WebGL技术实现虚拟物体的呈现，同时提供了相应的API和工具库，方便开发者进行AR应用程序开发。
+  \item React 生态：目前已有许多开发人员将 Three.js, AR.js 等主流技术方案整合到 React 生态中，诞生了例如 @react-three 等优秀的开源框架，且社区配备了良好的开发文档。
+\end{itemize}
+
+\subsection{研究目标与内容}
+
+本系统以校园环境为依托，采用 WebGL 技术实现 3D 图形显示功能，AR.js 实现现实世界识别功能。系统完全使用已有的开源技术，不存在任何技术壁垒。且仅需将系统部署在服务器上即可通过浏览器实现所有功能。本系统是以 WebGL 技术为基础的 AR 系统的一次尝试与实现。
+
+由于完全采用浏览器技术，本系统具有良好的迁移性。可以嵌入到微信，支付宝等小程序中；或者封装成移动端 app；亦或是嵌入专业 AR 设备。
+
+本系统致力于开发一套三维交互系统，用户仅需移动端设备通过摄像头即可完成对现实世界的识别，系统将自动识别采集到的图像信息并作出相应的响应: 显示三维动效或相关场景信息。用户也可以在设备上将虚拟物体放置到现实场景中预览效果。同时本系统也提供了基本的用户身份管理与社区功能，用户进入系统后将自动鉴定权限并提供对应的功能。
+
+本系统研究内容如下:
+
+\begin{enumerate}
+  \item 了解 WebGL 技术，以 Chrome 为代表的现代浏览器对 WebGL 技术的迭代发展情况。着重了解 WebGL 技术的现状，实现方案，未来发展方向。深入学习 3D 实现技术，优化方案。
+  \item 学习主流的 WebGL 实现框架: Three.js，前端框架: React.js, 前端 UI 框架: MaterialUI。以及 React 生态主流的 Three.js 实现方案: @React-Three。
+  \item 学习使用 ar.js，将其整合进 React 框架，理解其背后的图像识别，标记捕捉算法。根据实际使用情况尝试对系统进行优化。
+  \item 基于 WebGL 技术与 AR.js 框架完成系统核心功能的设计，实现，优化，提供简洁美观的UI界面，人性化的用户体验。
+\end{enumerate}
+
+本系统核心功能采用 WebGL, AR 技术调用移动端操作系统 AR 服务。具体实现上采用 React, MaterialUI, Three.js, AR.js 框架并对其进行封装。系统技术栈如图\ref{fig:系统核心功能技术栈}所示:
+
+\begin{figure}[H]
+  \small
+  \centering
+  \begin{tikzpicture}[font=\small]
+    \begin{scope}
+      \node at (-3,0) {系统服务};
+      \node [block, color=white, fill=red!60, minimum width=3cm] at (0,0) {ARCore (Android)};
+      \node [block, color=white, fill=red!60, minimum width=3cm] at (4,0) {ARKit (iOS)};
+    \end{scope}
+    \begin{scope}[yshift=0.75cm]
+      \node at (-3,0) {浏览器};
+      \node [block, color=white, fill=orange!60, minimum width=2cm] at (-0.5,0) {HTML5};
+      \node [block, color=white, fill=orange!60, minimum width=2cm] at (2,0) {CSS3};
+      \node [block, color=white, fill=orange!60, minimum width=2cm] at (4.5,0) {JS,TS};
+    \end{scope}
+    \begin{scope}[yshift=1.5cm]
+      \node at (-3,0) {前端框架};
+      \node [block, color=white, fill=orange!60, minimum width=2cm] at (-0.5,0) {React(hooks)};
+      \node [block, color=white, fill=orange!60, minimum width=2cm] at (2,0) {Redux};
+      \node [block, color=white, fill=orange!60, minimum width=2cm] at (4.5,0) {MaterialUI 5};
+    \end{scope}
+    \begin{scope}[yshift=3cm]
+      \node at (-3,0.5) {应用组件};
+      \node [block, color=white, fill=blue!20, minimum width=7cm, minimum height=2cm] at (2,0) {};
+      \node at (2,0.75) {WebGL};
+      \node [block, color=white, fill=blue!60, minimum width=2cm, font=\footnotesize] at (0.5,-0.5) {three};
+      \node [block, color=white, fill=blue!60, minimum width=2cm, font=\footnotesize] at (3.5,-0.5) {@react-three/fiber};
+      \node [block, color=white, fill=blue!60, minimum width=2cm, font=\footnotesize] at (0.5,0.25) {@react-three/xr};
+      \node [block, color=white, fill=blue!60, minimum width=2cm, font=\footnotesize] at (3.5,0.25) {@react-three/drei};
+      \node [block, color=white, fill=blue!60, minimum width=7cm] at (2,1.5) {@ar-js-org/ar.js};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{系统核心功能技术栈}
+  \label{fig:系统核心功能技术栈}
+\end{figure}
+
+\subsection{论文组织结构}
+
+论文包括以下七个部分:
+\begin{enumerate}
+  \item 绪论。这一部分介绍了 AR 的发展，基础功能实现原理，软硬件生态。通过查阅文献研究了 WebGL 实现 AR 功能的可行性。对 WebGL 实现 AR 功能的主流方案做了梳理，确定了系统的实现目标与主要研究内容。
+  \item 技术与方法。简要阐述系统使用的技术方案，主要介绍了 WebGL 技术与 AR 技术以及具体采用的应用组件。介绍相关组件生态与开发工具。
+  \item 系统分析。阐述系统可行性分析，主要梳理了目前采用的技术方案(three.js 与 ar.js)可行性与优缺点。同时阐述需求分析，明确系统需要实现的功能。
+  \item 系统设计。对系统整体功能和关键业务梳理分析，对核心功能的实现与优化方案进行阐述。
+  \item 系统实现。介绍系统完成后各个界面的功能。
+  \item 系统测试。分别进行了单元测试，集成测试，性能测试。着重对 ar.js 的图像识别与标记捕捉功能进行测试。
+  \item 总结。系统开发总结，对系统的一些展望，个人开发过程中的收获。
+\end{enumerate}
