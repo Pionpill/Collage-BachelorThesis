@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1/test?characterEncoding=utf-8&useUnicode=true&serverTimezone=UTC&useSSL=false&autoReconnect=true
+    url: jdbc:mysql://127.0.0.1/arcampus?characterEncoding=utf-8&useUnicode=true&serverTimezone=UTC&useSSL=false&autoReconnect=true
     username: root
     password: 2000cdwx0415
 

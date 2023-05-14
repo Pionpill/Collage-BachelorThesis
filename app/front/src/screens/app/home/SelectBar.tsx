@@ -1,19 +1,17 @@
-import { LocalOfferOutlined, Search } from "@mui/icons-material";
-import {
-  Divider,
-  IconButton,
-  InputBase,
-  Paper,
-  Stack,
-  Tab,
-  Tabs,
-} from "@mui/material";
+import { Search } from "@mui/icons-material";
+import { IconButton, InputBase, Paper, Stack, Tab, Tabs } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { HomeTab, changeTag } from "../../../store/features/homeSlice";
+import {
+  changeSearch,
+  changeTag,
+  HomeTab,
+} from "../../../store/features/homeSlice";
 
 const SearchBar: React.FC = () => {
+  const searchRef = React.useRef<HTMLInputElement>(null!);
+  const dispatch = useDispatch();
   return (
     <Paper
       component="form"
@@ -24,14 +22,22 @@ const SearchBar: React.FC = () => {
         width: "100%",
       }}
     >
-      <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search Models" />
-      <IconButton type="button" aria-label="search">
+      <InputBase
+        sx={{ ml: 1, flex: 1 }}
+        placeholder="Search Models"
+        inputRef={searchRef}
+      />
+      <IconButton
+        type="button"
+        aria-label="search"
+        onClick={() => dispatch(changeSearch(searchRef.current.value))}
+      >
         <Search />
       </IconButton>
-      <Divider orientation="vertical" />
+      {/* <Divider orientation="vertical" />
       <IconButton color="info" aria-label="directions">
         <LocalOfferOutlined />
-      </IconButton>
+      </IconButton> */}
     </Paper>
   );
 };

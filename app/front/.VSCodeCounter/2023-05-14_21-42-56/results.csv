@@ -1,0 +1,108 @@
+"filename", "language", "CSS", "TypeScript", "TypeScript JSX", "JavaScript JSX", "JavaScript", "comment", "blank", "total"
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\api\aMapApi.ts", "TypeScript", 0, 16, 0, 0, 0, 0, 3, 19
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\api\markerApi.ts", "TypeScript", 0, 41, 0, 0, 0, 0, 5, 46
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\api\modelApi.ts", "TypeScript", 0, 145, 0, 0, 0, 0, 15, 160
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\api\userApi.ts", "TypeScript", 0, 132, 0, 0, 0, 0, 11, 143
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\ARPrompt.tsx", "TypeScript JSX", 0, 0, 146, 0, 0, 0, 3, 149
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\AbstractCard.tsx", "TypeScript JSX", 0, 0, 23, 0, 0, 0, 3, 26
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\FlexBox.tsx", "TypeScript JSX", 0, 0, 26, 0, 0, 0, 4, 30
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\MainContainer.tsx", "TypeScript JSX", 0, 0, 20, 0, 0, 0, 3, 23
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\PromptCard.tsx", "TypeScript JSX", 0, 0, 16, 0, 0, 0, 3, 19
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\UserAvatar.tsx", "TypeScript JSX", 0, 0, 37, 0, 0, 0, 5, 42
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\ar\ARCanvas.tsx", "TypeScript JSX", 0, 0, 66, 0, 0, 3, 9, 78
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\ar\ARMarker.tsx", "TypeScript JSX", 0, 0, 73, 0, 0, 1, 8, 82
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\ar\ARProvider.tsx", "TypeScript JSX", 0, 0, 123, 0, 0, 5, 27, 155
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\ar\ar.jsx", "JavaScript JSX", 0, 0, 0, 121, 0, 1, 24, 146
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\ar\index.d.ts", "TypeScript", 0, 15, 0, 0, 0, 0, 3, 18
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\ar\index.js", "JavaScript", 0, 0, 0, 0, 2, 0, 2, 4
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\ar\types.ts", "TypeScript", 0, 41, 0, 0, 0, 28, 3, 72
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\menuItems.tsx", "TypeScript JSX", 0, 0, 35, 0, 0, 0, 5, 40
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\three\AREnvironment.tsx", "TypeScript JSX", 0, 0, 28, 0, 0, 0, 3, 31
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\three\ARPreviewModel.tsx", "TypeScript JSX", 0, 0, 25, 0, 0, 0, 3, 28
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\three\ModelControls.tsx", "TypeScript JSX", 0, 0, 13, 0, 0, 0, 3, 16
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\three\ModelEnvironment.tsx", "TypeScript JSX", 0, 0, 35, 0, 0, 1, 3, 39
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\three\ModelFloat.tsx", "TypeScript JSX", 0, 0, 20, 0, 0, 0, 3, 23
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\three\ModelLights.tsx", "TypeScript JSX", 0, 0, 23, 0, 0, 0, 3, 26
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\three\ModelMesh.tsx", "TypeScript JSX", 0, 0, 12, 0, 0, 0, 3, 15
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\components\three\SimpleEnvironment.tsx", "TypeScript JSX", 0, 0, 19, 0, 0, 1, 3, 23
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\config\api.ts", "TypeScript", 0, 1, 0, 0, 0, 0, 1, 2
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\config\key.ts", "TypeScript", 0, 18, 0, 0, 0, 2, 2, 22
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\config\message.ts", "TypeScript", 0, 5, 0, 0, 0, 0, 1, 6
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\config\token.ts", "TypeScript", 0, 5, 0, 0, 0, 0, 1, 6
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\data\marker.ts", "TypeScript", 0, 20, 0, 0, 0, 0, 3, 23
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\data\markerInfo.ts", "TypeScript", 0, 13, 0, 0, 0, 0, 2, 15
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\data\threeModel.ts", "TypeScript", 0, 86, 0, 0, 0, 0, 11, 97
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\data\user.ts", "TypeScript", 0, 42, 0, 0, 0, 0, 5, 47
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\hooks\useCurrentAccount.ts", "TypeScript", 0, 9, 0, 0, 0, 0, 3, 12
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\hooks\useThemeChoice.ts", "TypeScript", 0, 8, 0, 0, 0, 6, 3, 17
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\index.css", "CSS", 15, 0, 0, 0, 0, 0, 2, 17
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\main.tsx", "TypeScript JSX", 0, 0, 24, 0, 0, 0, 3, 27
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\models\BaseModel.ts", "TypeScript", 0, 23, 0, 0, 0, 5, 4, 32
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\models\Marker.ts", "TypeScript", 0, 39, 0, 0, 0, 0, 5, 44
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\models\MarkerInfo.ts", "TypeScript", 0, 39, 0, 0, 0, 0, 4, 43
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\models\MarkerInfoShort.ts", "TypeScript", 0, 43, 0, 0, 0, 0, 5, 48
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\models\ThreeModel.ts", "TypeScript", 0, 77, 0, 0, 0, 0, 7, 84
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\models\ThreeModelShort.ts", "TypeScript", 0, 40, 0, 0, 0, 0, 5, 45
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\models\User.ts", "TypeScript", 0, 65, 0, 0, 0, 1, 7, 73
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\models\UserShort.tsx", "TypeScript JSX", 0, 0, 39, 0, 0, 0, 6, 45
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\routes.tsx", "TypeScript JSX", 0, 0, 37, 0, 0, 0, 3, 40
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\account\AccountData.tsx", "TypeScript JSX", 0, 0, 82, 0, 0, 1, 4, 87
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\account\AccountProfile.tsx", "TypeScript JSX", 0, 0, 89, 0, 0, 0, 3, 92
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\account\AccountService\RelationLink.tsx", "TypeScript JSX", 0, 0, 80, 0, 0, 0, 5, 85
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\account\AccountService\ServiceList.tsx", "TypeScript JSX", 0, 0, 109, 0, 0, 0, 6, 115
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\account\AccountService\index.tsx", "TypeScript JSX", 0, 0, 12, 0, 0, 0, 3, 15
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\account\ActivityBanner.tsx", "TypeScript JSX", 0, 0, 57, 0, 0, 0, 3, 60
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\account\HeadSetting.tsx", "TypeScript JSX", 0, 0, 23, 0, 0, 0, 3, 26
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\account\index.tsx", "TypeScript JSX", 0, 0, 21, 0, 0, 0, 3, 24
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\home\CommunityProfile.tsx", "TypeScript JSX", 0, 0, 127, 0, 0, 1, 6, 134
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\home\ContentFlow.tsx", "TypeScript JSX", 0, 0, 162, 0, 0, 1, 8, 171
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\home\SelectBar.tsx", "TypeScript JSX", 0, 0, 63, 0, 0, 4, 6, 73
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\home\index.tsx", "TypeScript JSX", 0, 0, 17, 0, 0, 0, 3, 20
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\home\model\AbstractInfo.tsx", "TypeScript JSX", 0, 0, 133, 0, 0, 0, 3, 136
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\home\model\DetailInfo.tsx", "TypeScript JSX", 0, 0, 177, 0, 0, 1, 3, 181
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\home\model\ModelPrompt.tsx", "TypeScript JSX", 0, 0, 106, 0, 0, 0, 3, 109
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\home\model\ModelScene.tsx", "TypeScript JSX", 0, 0, 36, 0, 0, 1, 4, 41
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\home\model\Widgets.tsx", "TypeScript JSX", 0, 0, 67, 0, 0, 0, 5, 72
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\home\model\index.tsx", "TypeScript JSX", 0, 0, 150, 0, 0, 1, 4, 155
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\identify\ARIdentifyModel.tsx", "TypeScript JSX", 0, 0, 63, 0, 0, 0, 5, 68
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\identify\IdentifyPrompt.tsx", "TypeScript JSX", 0, 0, 109, 0, 0, 0, 3, 112
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\identify\IdentifyScene.tsx", "TypeScript JSX", 0, 0, 47, 0, 0, 0, 3, 50
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\identify\InfoCard.tsx", "TypeScript JSX", 0, 0, 103, 0, 0, 0, 6, 109
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\identify\InfoTip.tsx", "TypeScript JSX", 0, 0, 66, 0, 0, 0, 4, 70
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\identify\Widgets.tsx", "TypeScript JSX", 0, 0, 50, 0, 0, 0, 4, 54
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\identify\index.tsx", "TypeScript JSX", 0, 0, 125, 0, 0, 1, 6, 132
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\index.tsx", "TypeScript JSX", 0, 0, 136, 0, 0, 0, 5, 141
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\preview\PreviewPrompt.tsx", "TypeScript JSX", 0, 0, 130, 0, 0, 0, 3, 133
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\preview\Widgets.tsx", "TypeScript JSX", 0, 0, 60, 0, 0, 0, 4, 64
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\preview\index.tsx", "TypeScript JSX", 0, 0, 168, 0, 0, 1, 4, 173
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\upload\identify\IdentifyConfirmDialog.tsx", "TypeScript JSX", 0, 0, 66, 0, 0, 0, 3, 69
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\upload\identify\index.tsx", "TypeScript JSX", 0, 0, 108, 0, 0, 0, 5, 113
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\upload\index.tsx", "TypeScript JSX", 0, 0, 74, 0, 0, 0, 4, 78
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\upload\model\ModelConfirmDialog.tsx", "TypeScript JSX", 0, 0, 68, 0, 0, 0, 3, 71
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\app\upload\model\index.tsx", "TypeScript JSX", 0, 0, 167, 0, 0, 0, 4, 171
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\index\TestScene.tsx", "TypeScript JSX", 0, 0, 122, 0, 0, 0, 6, 128
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\index\index.tsx", "TypeScript JSX", 0, 0, 41, 0, 0, 0, 3, 44
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\login\LoginScene.tsx", "TypeScript JSX", 0, 0, 38, 0, 0, 0, 3, 41
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\login\index.tsx", "TypeScript JSX", 0, 0, 166, 0, 0, 1, 5, 172
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\registry\RegistryScene.tsx", "TypeScript JSX", 0, 0, 38, 0, 0, 0, 3, 41
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\screens\registry\index.tsx", "TypeScript JSX", 0, 0, 175, 0, 0, 10, 9, 194
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\store\features\accountSlice.ts", "TypeScript", 0, 41, 0, 0, 0, 0, 6, 47
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\store\features\appSlice.ts", "TypeScript", 0, 20, 0, 0, 0, 0, 5, 25
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\store\features\homeSlice.ts", "TypeScript", 0, 35, 0, 0, 0, 0, 5, 40
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\store\features\identifySlice.ts", "TypeScript", 0, 56, 0, 0, 0, 0, 4, 60
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\store\features\identifyUploadSlice.ts", "TypeScript", 0, 58, 0, 0, 0, 2, 5, 65
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\store\features\modelSlice.ts", "TypeScript", 0, 34, 0, 0, 0, 0, 4, 38
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\store\features\modelUploadSlice.ts", "TypeScript", 0, 54, 0, 0, 0, 0, 5, 59
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\store\features\previewSlice.ts", "TypeScript", 0, 34, 0, 0, 0, 0, 4, 38
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\store\index.ts", "TypeScript", 0, 24, 0, 0, 0, 0, 3, 27
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\styles\degree.ts", "TypeScript", 0, 22, 0, 0, 0, 0, 3, 25
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\styles\macro.ts", "TypeScript", 0, 32, 0, 0, 0, 0, 7, 39
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\styles\measure.ts", "TypeScript", 0, 1, 0, 0, 0, 0, 1, 2
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\styles\themes.ts", "TypeScript", 0, 56, 0, 0, 0, 0, 4, 60
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\types\api.ts", "TypeScript", 0, 10, 0, 0, 0, 0, 2, 12
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\utils\dateUtils.ts", "TypeScript", 0, 80, 0, 0, 0, 12, 4, 96
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\utils\keyUtils.ts", "TypeScript", 0, 14, 0, 0, 0, 2, 3, 19
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\utils\localStorageUtils.ts", "TypeScript", 0, 17, 0, 0, 0, 8, 3, 28
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\utils\userUtils.tsx", "TypeScript JSX", 0, 0, 90, 0, 0, 41, 9, 140
+"c:\Users\Pionpill\Projects\Code\Collage\Collage-BacheiorThesis\app\front\src\vite-env.d.ts", "TypeScript", 0, 0, 0, 0, 0, 1, 1, 2
+"Total", "-", 15, 1511, 4561, 121, 2, 143, 491, 6844

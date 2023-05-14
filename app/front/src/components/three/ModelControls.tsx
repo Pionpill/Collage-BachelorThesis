@@ -1,7 +1,9 @@
 import { OrbitControls } from "@react-three/drei";
-import { ControlFields } from "../../models/ThreeModel";
+import { CommonControlFields } from "../../models/ThreeModel";
 
-const ModelControls: React.FC<{ fields?: ControlFields }> = ({ fields }) => {
+const ModelControls: React.FC<{ fields?: CommonControlFields }> = ({
+  fields,
+}) => {
   return (
     <OrbitControls
       autoRotate={fields?.autoRotateSpeed ? true : false}

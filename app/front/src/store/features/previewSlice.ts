@@ -11,7 +11,7 @@ export const previewSlice = createSlice({
   initialState: {
     isPure: false,
     isPivot: false,
-    isHelpPrompt: true,
+    isHelpPrompt: false,
   },
   reducers: {
     togglePreviewPureModel: (state: PreviewState) => {

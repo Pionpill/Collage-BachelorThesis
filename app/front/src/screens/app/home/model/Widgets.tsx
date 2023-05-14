@@ -34,7 +34,7 @@ const Dial: React.FC = () => {
     >
       <SpeedDialAction
         key="back"
-        tooltipTitle="回退"
+        tooltipTitle="返回"
         icon={<KeyboardBackspaceOutlined />}
         onClick={() => history.back()}
       />

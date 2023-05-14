@@ -41,7 +41,11 @@ const ActivityBanner: React.FC = () => {
         <DialogTitle>AR Campus 使用手册</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            AR Campus 使用 WebGL 与 AR.js 构建现实与虚拟场景的交互系统。
+            AR Campus 使用 WebGL 与 AR
+            技术构建现实与虚拟场景的交互系统。我们提供了三个核心功能。1. App
+            预览3D模型，系统提供了个性化控制组件。 2.
+            将3D模型放入现实场景提供预览功能。3.
+            识别现实场景，将摄像头对准现实场景即可。
           </DialogContentText>
         </DialogContent>
         <DialogActions>

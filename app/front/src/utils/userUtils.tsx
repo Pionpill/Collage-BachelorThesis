@@ -25,10 +25,10 @@ import { UserPermission, UserSexual } from "../models/User";
  * @returns 字符串是否符合用户名规范
  * @throws 用户名为保留名
  */
-export const isUserName = (userName: string): boolean => {
-  const reg = /^\S{4,16}$/;
+export const checkUserName = (userName: string): boolean => {
+  const reg = /^\S{2,16}$/;
   const keyName = ["游客"];
-  if (keyName.includes(userName)) throw "用户名为保留单词";
+  if (keyName.includes(userName)) alert("用户名为保留单词");
   return reg.test(userName);
 };
 
@@ -37,7 +37,7 @@ export const isUserName = (userName: string): boolean => {
  * @param email 邮箱
  * @returns 字符串是否符合邮箱规范
  */
-export const isEmail = (email: string): boolean => {
+export const checkEmail = (email: string): boolean => {
   return validator.isEmail(email);
 };
 
@@ -46,14 +46,22 @@ export const isEmail = (email: string): boolean => {
  * @param password 密码
  * @returns 字符串是否符合密码规范
  */
-export const isPassword = (password: string): boolean => {
+export const checkPassword = (password: string): boolean => {
   return (
     validator.isStrongPassword(password, {
       minLowercase: 1,
       minUppercase: 1,
-      minSymbols: 0,
     }) && validator.isLength(password, { min: 8, max: 32 })
   );
+};
+
+/**
+ * 判断字符串是否为 URL
+ * @param url URL
+ * @returns 是否为 URL
+ */
+export const checkUrl = (url: string): boolean => {
+  return validator.isURL(url);
 };
 
 /**

@@ -57,3 +57,5 @@ export const darkTheme: Theme = createTheme(
     },
   })
 );
+
+export const themeColor = "#00838f";

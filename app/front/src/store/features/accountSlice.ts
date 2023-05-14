@@ -1,25 +1,43 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userPionpill } from "../../data/user";
-import User from "../../models/User";
+import { getTimeSpan } from "../../utils/dateUtils";
 
 interface AccountAction {
   type: string;
-  payload: User;
+  payload: {
+    userId: string;
+  };
 }
 
 interface AccountState {
-  user: User;
+  userId: string;
 }
+
+const getInitUserId = (): string => {
+  const checkLoginData = (loginData: Date): boolean => {
+    const now = new Date();
+    const spanDay = getTimeSpan(now, loginData);
+    return spanDay <= 7;
+  };
+  const userId = localStorage.getItem("userId");
+  const lastLoginDate = localStorage.getItem("lastLoginDate");
+  if (
+    userId !== null &&
+    lastLoginDate !== null &&
+    checkLoginData(new Date(lastLoginDate))
+  )
+    return userId;
+  else return "visitor";
+};
 
 export const accountSlice = createSlice({
   name: "account",
   initialState: {
-    user: userPionpill,
+    userId: getInitUserId(),
   },
   reducers: {
     changeAccountInfo: (state: AccountState, action: AccountAction) => {
-      console.log(`切换用户: ${state.user.name}`);
-      state.user = action.payload;
+      console.log(`切换用户: ${state.userId}`);
+      state.userId = action.payload.userId;
     },
   },
 });

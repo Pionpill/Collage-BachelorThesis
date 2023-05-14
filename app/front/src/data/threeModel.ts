@@ -3,7 +3,7 @@ import ThreeModelShort from "../models/ThreeModelShort";
 import { userShortPionpill, userShortPionpillAlt } from "./user";
 
 const threeModelShoes = new ThreeModel(
-  "preset-1",
+  "1",
   userShortPionpill,
   "https://pionpill-1316521854.cos.ap-shanghai.myqcloud.com/bacheior_thesis/images/model_shoe.png",
   "Nike Air 跑鞋",
@@ -23,7 +23,7 @@ threeModelShoes.environmentFields = {
 export { threeModelShoes };
 
 export const threeModelMac = new ThreeModel(
-  "preset-3",
+  "2",
   userShortPionpill,
   "https://pionpill-1316521854.cos.ap-shanghai.myqcloud.com/bacheior_thesis/images/model_mac.png",
   "Mac 笔记本",
@@ -35,7 +35,7 @@ export const threeModelMac = new ThreeModel(
 );
 
 export const threeModelKamdo = new ThreeModel(
-  "preset-4",
+  "3",
   userShortPionpillAlt,
   "https://pionpill-1316521854.cos.ap-shanghai.myqcloud.com/bacheior_thesis/images/model_robot.png",
   "机器人",
@@ -47,7 +47,7 @@ export const threeModelKamdo = new ThreeModel(
 );
 
 export const threeModelBench = new ThreeModel(
-  "preset-6",
+  "4",
   userShortPionpillAlt,
   "https://pionpill-1316521854.cos.ap-shanghai.myqcloud.com/bacheior_thesis/images/model_chair.png",
   "我的世界椅子",
@@ -59,7 +59,7 @@ export const threeModelBench = new ThreeModel(
 );
 
 export const threeModelMaple = new ThreeModel(
-  "preset-8",
+  "5",
   userShortPionpillAlt,
   "https://pionpill-1316521854.cos.ap-shanghai.myqcloud.com/bacheior_thesis/images/model_maple.png",
   "枫树",
@@ -71,7 +71,7 @@ export const threeModelMaple = new ThreeModel(
 );
 
 export const threeModelLight = new ThreeModel(
-  "preset-10",
+  "6",
   userShortPionpill,
   "https://pionpill-1316521854.cos.ap-shanghai.myqcloud.com/bacheior_thesis/images/model_light.png",
   "灯",
@@ -85,3 +85,12 @@ export const threeModelLight = new ThreeModel(
 export const threeModelShortShoes: ThreeModelShort = threeModelShoes;
 export const threeModelShortMac: ThreeModelShort = threeModelMac;
 export const threeModelShortKamdo: ThreeModelShort = threeModelKamdo;
+
+export const presetModels = [
+  threeModelBench,
+  threeModelKamdo,
+  threeModelLight,
+  threeModelMac,
+  threeModelMaple,
+  threeModelShoes,
+];

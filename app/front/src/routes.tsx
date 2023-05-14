@@ -3,8 +3,10 @@ import AppWrapper from "./screens/app";
 import Account from "./screens/app/account";
 import Home from "./screens/app/home";
 import ModelPreview from "./screens/app/home/model";
-import Interaction from "./screens/app/interaction";
+import Identify from "./screens/app/identify";
 import Preview from "./screens/app/preview";
+import IdentifyUpload from "./screens/app/upload/identify";
+import ModelUpload from "./screens/app/upload/model";
 import Index from "./screens/index";
 import Login from "./screens/login";
 import Registry from "./screens/registry";
@@ -23,8 +25,10 @@ const AppRoutes: React.FC = () => {
             <Route path="home/:model" element={<ModelPreview />} />
             <Route path="preview" element={<Preview />} />
             <Route path="preview/:model" element={<Preview />} />
-            <Route path="interaction" element={<Interaction />} />
+            <Route path="identify" element={<Identify />} />
             <Route path="account" element={<Account />} />
+            <Route path="upload/model" element={<ModelUpload />} />
+            <Route path="upload/identify" element={<IdentifyUpload />} />
           </Route>
         </Route>
       </Routes>

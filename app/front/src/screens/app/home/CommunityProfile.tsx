@@ -7,13 +7,25 @@ import {
   NightsStay,
   SevereCold,
 } from "@mui/icons-material";
-import { Badge, IconButton, Tooltip, Typography } from "@mui/material";
+import {
+  Badge,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import React, { ReactNode } from "react";
 import { BsFillCloudRainFill } from "react-icons/bs";
 import { FaHotjar } from "react-icons/fa";
 import { GiFog } from "react-icons/gi";
-import aMapWeatherApi from "../../../api/aMapWeatherApi";
+import aMapWeatherApi from "../../../api/aMapApi";
 import FlexBox from "../../../components/FlexBox";
+import { userVisitor } from "../../../data/user";
 import useCurrentAccount from "../../../hooks/useCurrentAccount";
 import User from "../../../models/User";
 
@@ -44,12 +56,17 @@ const getWeatherIcon = (weather: string | null): ReactNode => {
 };
 
 const CommunityProfile: React.FC = () => {
-  const account: User = useCurrentAccount();
+  const [account, setAccount] = React.useState<User>(userVisitor);
+  const [activityOpen, setActivityOpen] = React.useState<boolean>(false);
+  const [emailOpen, setEmailOpen] = React.useState<boolean>(false);
+  const promise = useCurrentAccount();
   const [weather, setWeather] = React.useState<string | null>(null);
   React.useState(() => {
     aMapWeatherApi().then((response) => {
-      const newWeather = response.lives[0].weather;
-      setWeather(newWeather);
+      setWeather(response.lives[0].weather);
+    });
+    promise.then((user) => {
+      setAccount(user);
     });
   });
 
@@ -66,7 +83,7 @@ const CommunityProfile: React.FC = () => {
       </FlexBox>
       <FlexBox gap={1}>
         {/* TODO 消息数量通过 API 获取 */}
-        <IconButton>
+        <IconButton onClick={() => setActivityOpen(true)}>
           <Badge
             color="success"
             overlap="circular"
@@ -76,10 +93,10 @@ const CommunityProfile: React.FC = () => {
             <CelebrationOutlined sx={{ opacity: 0.75 }} />
           </Badge>
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => setEmailOpen(true)}>
           <Badge
             color="success"
-            badgeContent={100}
+            badgeContent={0}
             overlap="circular"
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
           >
@@ -87,6 +104,28 @@ const CommunityProfile: React.FC = () => {
           </Badge>
         </IconButton>
       </FlexBox>
+      <Dialog open={activityOpen} scroll="paper">
+        <DialogTitle>近期活动</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            项目完成了，来试试吧。遇到 BUG 请联系作者: 673486387@qq.com
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setActivityOpen(false)}>关闭</Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={emailOpen} scroll="paper">
+        <DialogTitle>邮箱</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            未接入邮箱系统，这里仅留一个 Icon，如有需要请自行接入。
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setEmailOpen(false)}>关闭</Button>
+        </DialogActions>
+      </Dialog>
     </FlexBox>
   );
 };

@@ -1,7 +1,9 @@
 import {
   EditCalendar,
   HistoryOutlined,
+  Star,
   StarBorderOutlined,
+  ThumbUp,
   ThumbUpOutlined,
 } from "@mui/icons-material";
 import {
@@ -12,10 +14,25 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import {
+  addModelLikeApi,
+  deleteModelLikeApi,
+  isModelLikedByUserApi,
+} from "../../../../api/modelApi";
+import {
+  addUserCollectionApi,
+  deleteUserCollectionApi,
+  isModelCollectedByUserApi,
+  isUserFollowApi,
+  subscribeUserApi,
+} from "../../../../api/userApi";
 import FlexBox from "../../../../components/FlexBox";
 import UserAvatar from "../../../../components/UserAvatar";
 import ThreeModel from "../../../../models/ThreeModel";
+import { RootState } from "../../../../store";
 import { toggleModelDetailModel } from "../../../../store/features/modelSlice";
 import { fontBold } from "../../../../styles/macro";
 import {
@@ -25,6 +42,62 @@ import {
 
 const DetailInfo: React.FC<{ model: ThreeModel }> = ({ model }) => {
   const dispatch = useDispatch();
+  const userId = useSelector((state: RootState) => state.account.userId);
+  const modelId = useParams().model?.slice(6);
+  const [like, setLike] = React.useState<boolean>(false);
+  const [collect, setCollect] = React.useState<boolean>(false);
+  const [subscribe, setSubscribe] = React.useState<boolean>(false);
+  const setLikeCondition = async () => {
+    if (userId === "visitor" || !modelId) return;
+    const promise = isModelLikedByUserApi(modelId, userId);
+    (await promise).json().then((response) => {
+      setLike(response.data);
+    });
+  };
+  const setCollectCondition = async () => {
+    if (userId === "visitor" || !modelId) return;
+    const promise = isModelCollectedByUserApi(modelId, userId);
+    (await promise).json().then((response) => {
+      setCollect(response.data);
+    });
+  };
+  const setSubscribeCondition = async () => {
+    const promise = isUserFollowApi(model.author.id, userId);
+    (await promise).json().then((response) => {
+      setSubscribe(response.data);
+    });
+  };
+  React.useState(() => {
+    setLikeCondition();
+    setCollectCondition();
+    setSubscribeCondition();
+  });
+  const handleClickLike = async () => {
+    if (!modelId) return;
+    if (like) {
+      deleteModelLikeApi(modelId, userId);
+      model.likeCount--;
+      setLike(false);
+    } else {
+      addModelLikeApi(modelId, userId);
+      model.likeCount++;
+      setLike(true);
+    }
+  };
+  const handleClickCollect = async () => {
+    if (!modelId) return;
+    if (collect) {
+      deleteUserCollectionApi(modelId, userId);
+      setCollect(false);
+    } else {
+      addUserCollectionApi(modelId, userId);
+      setCollect(true);
+    }
+  };
+  const handleSubscribe = () => {
+    subscribeUserApi(model.author.id, userId);
+    setSubscribe(true);
+  };
   return (
     <Stack sx={{ p: 2, pb: "72px", height: "calc(100vh - 400px)" }} gap={3}>
       <FlexBox justify="space-between">
@@ -78,8 +151,12 @@ const DetailInfo: React.FC<{ model: ThreeModel }> = ({ model }) => {
         <Typography>{model.abstract}</Typography>
       </FlexBox>
       <FlexBox justify="space-between">
-        <IconButton>
-          <ThumbUpOutlined fontSize="small" />
+        <IconButton onClick={handleClickLike}>
+          {like ? (
+            <ThumbUp fontSize="small" />
+          ) : (
+            <ThumbUpOutlined fontSize="small" />
+          )}
           <Typography variant="body2" pl={1}>
             {model.likeCount > 999
               ? "999+"
@@ -89,11 +166,20 @@ const DetailInfo: React.FC<{ model: ThreeModel }> = ({ model }) => {
           </Typography>
         </IconButton>
         <FlexBox gap={1}>
+          {!subscribe && (
+            <Button sx={{ color: "theme" }} onClick={handleSubscribe}>
+              关注作者
+            </Button>
+          )}
           <Avatar
             sx={{ color: "divider", borderRadius: "4px", bgcolor: "divider" }}
+            onClick={handleClickCollect}
           >
-            {/* TODO 是否被用户收藏 */}
-            <StarBorderOutlined sx={{ color: "theme" }} />
+            {collect ? (
+              <Star sx={{ color: "theme" }} />
+            ) : (
+              <StarBorderOutlined sx={{ color: "theme" }} />
+            )}
           </Avatar>
           <Button
             title="detail"

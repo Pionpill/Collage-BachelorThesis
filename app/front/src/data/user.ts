@@ -17,16 +17,16 @@ export const userShortPionpillAlt = new UserShort(
   new Date(2023, 4, 15)
 );
 
-export const userPionpill = new User(
+export const userVisitor = new User(
   "201983290194",
-  "pionpill",
+  "游客",
   "https://avatars.githubusercontent.com/u/70939356?s=128&v=4",
   UserSexual["male"],
-  UserPermission["admin"],
-  "速速毕业，老天保佑",
+  UserPermission["visitor"],
+  "游客测试账户",
   "软件学院",
   "软件工程系",
-  ["大四", "青年新闻中心主席"],
+  ["游客测试账户"],
   new Date(2000, 4, 16),
   new Date(2023, 2, 11)
 );

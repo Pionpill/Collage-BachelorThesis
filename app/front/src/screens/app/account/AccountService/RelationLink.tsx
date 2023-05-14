@@ -1,6 +1,6 @@
 import {
   BookOutlined,
-  FavoriteBorderOutlined,
+  GitHub,
   SchoolOutlined,
   SmsFailedOutlined,
 } from "@mui/icons-material";
@@ -14,7 +14,9 @@ import {
   Typography,
 } from "@mui/material";
 import { ReactNode } from "react";
+import { BsFillPersonVcardFill } from "react-icons/bs";
 import FlexBox from "../../../../components/FlexBox";
+import { themeColor } from "../../../../styles/themes";
 
 const RelationLinkButton: React.FC<
   React.PropsWithChildren<{ label: string }>
@@ -59,7 +61,7 @@ const RelationLink: React.FC = () => {
   return (
     <FlexBox align="space-between" fullWidth column gap={1}>
       <Typography color="text.primary" variant="subtitle1">
-        推荐服务
+        相关链接
       </Typography>
       <Grid container>
         <RelationLinkButton label="学校官网">
@@ -67,19 +69,24 @@ const RelationLink: React.FC = () => {
             <SchoolOutlined sx={{ color: "theme" }} fontSize="large" />
           </IconButton>
         </RelationLinkButton>
-        <RelationLinkButton label="近期活动">
-          <IconButton href="https://www.nuist.edu.cn/main.htm">
-            <FavoriteBorderOutlined sx={{ color: "theme" }} fontSize="large" />
+        <RelationLinkButton label="了解 WebGL">
+          <IconButton href="https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API/Tutorial">
+            <SmsFailedOutlined sx={{ color: "theme" }} fontSize="large" />
           </IconButton>
         </RelationLinkButton>
         <RelationLinkButton label="了解 AR">
-          <IconButton href="https://www.nuist.edu.cn/main.htm">
+          <IconButton href="https://ar-js-org.github.io/AR.js-Docs/">
             <BookOutlined sx={{ color: "theme" }} fontSize="large" />
           </IconButton>
         </RelationLinkButton>
-        <RelationLinkButton label="人工服务">
-          <IconButton href="https://www.nuist.edu.cn/main.htm">
-            <SmsFailedOutlined sx={{ color: "theme" }} fontSize="large" />
+        <RelationLinkButton label="了解作者">
+          <IconButton href="https://pionpill.github.io/">
+            <BsFillPersonVcardFill size={35} color={themeColor} />
+          </IconButton>
+        </RelationLinkButton>
+        <RelationLinkButton label="开源地址">
+          <IconButton href="https://github.com/Pionpill/Collage-BacheiorThesis">
+            <GitHub sx={{ color: "theme" }} fontSize="large" />
           </IconButton>
         </RelationLinkButton>
       </Grid>

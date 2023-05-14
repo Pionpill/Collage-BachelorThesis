@@ -16,6 +16,7 @@ export const halfOpacitySx: SxProps = {
 
 export const fontBold: SxProps = {
   fontWeight: 600,
+  color: "text.primary",
 };
 
 export const TwoLineEllipsisSx: SxProps = {

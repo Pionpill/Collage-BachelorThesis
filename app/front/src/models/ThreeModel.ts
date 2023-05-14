@@ -2,7 +2,7 @@ import { PresetsType } from "@react-three/drei/helpers/environment-assets";
 import ThreeModelShort, { ThreeModelShortFields } from "./ThreeModelShort";
 import UserShort, { UserShortFields } from "./UserShort";
 
-export type ControlFields = {
+export type CommonControlFields = {
   autoRotateSpeed?: number;
 };
 
@@ -21,7 +21,7 @@ export type FloatFields = {
 export type ThreeModelFields = {
   abstract: string;
   modelUrl: string;
-  controlFields?: ControlFields;
+  controlFields?: CommonControlFields;
   environmentFields?: EnvironmentFields;
   floatFields?: FloatFields;
 } & ThreeModelShortFields;
@@ -29,7 +29,7 @@ export type ThreeModelFields = {
 export default class ThreeModel extends ThreeModelShort {
   abstract: string;
   modelUrl: string;
-  controlFields?: ControlFields;
+  commonControlFields?: CommonControlFields;
   environmentFields?: EnvironmentFields;
   floatFields?: FloatFields;
   constructor(
@@ -48,12 +48,13 @@ export default class ThreeModel extends ThreeModelShort {
     this.modelUrl = modelUrl;
   }
 
-  public static fromJson(
+  static fromJson(
     modelDate: ThreeModelFields,
-    userDate: UserShortFields
+    userDate: UserShortFields,
+    controlDate: CommonControlFields & EnvironmentFields & FloatFields
   ) {
     const author = UserShort.fromJson(userDate);
-    return new ThreeModel(
+    const result = new ThreeModel(
       modelDate.id,
       author,
       modelDate.coverUrl,
@@ -64,5 +65,19 @@ export default class ThreeModel extends ThreeModelShort {
       modelDate.createTime,
       modelDate.updateTime
     );
+    result.commonControlFields = {
+      autoRotateSpeed: controlDate.autoRotateSpeed,
+    };
+    result.environmentFields = {
+      background: controlDate.background,
+      preset: controlDate.preset,
+      blur: controlDate.blur,
+    };
+    result.floatFields = {
+      speed: controlDate.speed,
+      rotationIntensity: controlDate.rotationIntensity,
+      floatIntensity: controlDate.floatIntensity,
+    };
+    return result;
   }
 }

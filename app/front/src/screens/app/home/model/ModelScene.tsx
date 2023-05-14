@@ -31,7 +31,7 @@ const ModelScene: React.FC<{ model: ThreeModel }> = ({ model }) => {
         </ModelFloat>
         <ModelLights />
         <ModelEnvironment fields={model.environmentFields} />
-        <ModelControls fields={model.controlFields} />
+        <ModelControls fields={model.commonControlFields} />
       </Canvas>
     </FlexBox>
   );

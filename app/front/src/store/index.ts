@@ -2,8 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import accountReducer from "./features/accountSlice";
 import appReducer from "./features/appSlice";
 import homeReducer from "./features/homeSlice";
-import interactionReducer from "./features/interactionSlice";
+import identifyReducer from "./features/identifySlice";
+import identifyUploadReducer from "./features/identifyUploadSlice";
 import modelReducer from "./features/modelSlice";
+import modelUploadReducer from "./features/modelUploadSlice";
 import previewReducer from "./features/previewSlice";
 
 const store = configureStore({
@@ -13,7 +15,9 @@ const store = configureStore({
     home: homeReducer,
     model: modelReducer,
     preview: previewReducer,
-    interaction: interactionReducer,
+    identify: identifyReducer,
+    modelUpload: modelUploadReducer,
+    identifyUpload: identifyUploadReducer,
   },
 });
 

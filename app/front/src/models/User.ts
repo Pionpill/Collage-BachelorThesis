@@ -1,17 +1,17 @@
 import UserShort, { UserShortFields } from "./UserShort";
 
 export enum UserPermission {
-  visitor = "游客",
-  student = "学生",
-  teacher = "老师",
-  admin = "管理员",
+  visitor = "visitor",
+  student = "student",
+  teacher = "teacher",
+  admin = "admin",
 }
 
 export enum UserSexual {
-  male = "男",
-  female = "女",
-  secret = "保密",
-  undefined = "未知",
+  male = "male",
+  female = "female",
+  secret = "secret",
+  undefined = "undefined",
 }
 
 export type UserFields = {
@@ -56,7 +56,7 @@ export default class User extends UserShort {
   // TODO: UserSexual, UserPermission 等类型需要转换
   static fromJson(data: UserFields): User {
     return new User(
-      data.id,
+      String(data.id),
       data.name,
       data.avatarUrl,
       data.sexual,

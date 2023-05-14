@@ -1,8 +1,4 @@
-import {
-  DarkModeOutlined,
-  LightModeOutlined,
-  PaletteOutlined,
-} from "@mui/icons-material";
+import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material";
 import { Grid, IconButton, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import useThemeChoice from "../../../hooks/useThemeChoice";
@@ -20,11 +16,6 @@ const HeadSetting: React.FC = () => {
         </Typography>
         <IconButton onClick={() => dispatch(toggleTheme())} color="inherit">
           {modeIcon}
-        </IconButton>
-      </Grid>
-      <Grid item>
-        <IconButton color="inherit">
-          <PaletteOutlined />
         </IconButton>
       </Grid>
     </Grid>

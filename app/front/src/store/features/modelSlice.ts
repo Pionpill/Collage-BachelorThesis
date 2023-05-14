@@ -11,7 +11,7 @@ export const modelSlice = createSlice({
   initialState: {
     isDetail: false,
     isPure: false,
-    isHelpPrompt: true,
+    isHelpPrompt: false,
   },
   reducers: {
     toggleModelDetailModel: (state: ModelState) => {
