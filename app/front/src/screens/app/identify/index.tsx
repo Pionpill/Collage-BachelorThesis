@@ -11,7 +11,6 @@ import { getModelByIdApi } from "../../../api/modelApi";
 import { getUserById } from "../../../api/userApi";
 import ARPrompt from "../../../components/ARPrompt";
 import FlexBox from "../../../components/FlexBox";
-import { markerInfoTest } from "../../../data/markerInfo";
 import Marker, { MarkerFields } from "../../../models/Marker";
 import { UserShortFields } from "../../../models/UserShort";
 import { RootState } from "../../../store";
@@ -116,7 +115,7 @@ const Identify: React.FC = () => {
       >
         <LevaPanel />
         {init && <ARButton onClick={() => setARMode(!ARMode)} />}
-        <InfoTip markerInfoShort={markerInfoTest} />
+        <InfoTip />
         <InfoCard />
         <ARPrompt sx={{ visibility: ARMode ? "hidden" : "visible" }} />
         <IdentifyPrompt

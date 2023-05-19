@@ -1,9 +1,17 @@
 import { Close, MoreHoriz } from "@mui/icons-material";
 import { Avatar, IconButton, Typography } from "@mui/material";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  MarkerInfoApiType,
+  getMarkerInfoByMarkerIdApi,
+} from "../../../api/markerApi";
+import { getUserById } from "../../../api/userApi";
 import AbstractCard from "../../../components/AbstractCard";
 import FlexBox from "../../../components/FlexBox";
-import MarkerInfoShort from "../../../models/MarkerInfoShort";
+import MarkerInfo, { MarkerInfoFields } from "../../../models/MarkerInfo";
+import User from "../../../models/User";
+import { UserShortFields } from "../../../models/UserShort";
 import { RootState } from "../../../store";
 import {
   changeIdentifyInfoCard,
@@ -11,11 +19,42 @@ import {
 } from "../../../store/features/identifySlice";
 import { fontBold, partOpacitySx } from "../../../styles/macro";
 
-const InfoTip: React.FC<{ markerInfoShort: MarkerInfoShort }> = ({
-  markerInfoShort,
-}) => {
+const InfoTip: React.FC = () => {
   const showTip = useSelector((root: RootState) => root.identify.showTip);
+  const markerId = useSelector((state: RootState) => state.identify.markerId);
+  const [markerInfo, setMarkerInfo] = React.useState<MarkerInfo | null>(null);
   const dispatch = useDispatch();
+
+  const initMarkerInfo = async () => {
+    (await getMarkerInfoByMarkerIdApi(markerId))
+      .json()
+      .then(async (response) => {
+        const markerInfoApiDate: MarkerInfoApiType = response.data;
+        const author = (await getUserById(
+          String(markerInfoApiDate!.authorId)
+        )) as User;
+        const userData: UserShortFields = {
+          id: author.id,
+          name: author.name,
+          avatarUrl: author.avatarUrl,
+        };
+        const markerInfoData: MarkerInfoFields = {
+          location: markerInfoApiDate.location,
+          introduction: markerInfoApiDate.detailInfo,
+          coverUrl: markerInfoApiDate.coverUrl,
+          title: markerInfoApiDate.title,
+          abstract: markerInfoApiDate.abstractInfo,
+          id: String(markerInfoApiDate.id),
+        };
+        const markerInfo = MarkerInfo.fromJson(markerInfoData, userData);
+        setMarkerInfo(markerInfo);
+      });
+  };
+
+  React.useEffect(() => {
+    if (!markerId) return;
+    initMarkerInfo();
+  }, [markerId]);
 
   return (
     <AbstractCard
@@ -29,21 +68,25 @@ const InfoTip: React.FC<{ markerInfoShort: MarkerInfoShort }> = ({
     >
       <FlexBox gap={2} m={2} justify="space-between" fullWidth>
         <FlexBox gap={2}>
-          <Avatar
-            variant="rounded"
-            alt={markerInfoShort.title}
-            src={markerInfoShort.coverUrl}
-          />
-          <FlexBox
-            column
-            align="flex-start"
-            sx={{ maxWidth: "300px", overflow: "hidden" }}
-          >
-            <Typography sx={fontBold}>{markerInfoShort.title}</Typography>
-            <Typography sx={partOpacitySx} variant="subtitle2">
-              {markerInfoShort.abstract}
-            </Typography>
-          </FlexBox>
+          {markerInfo && (
+            <>
+              <Avatar
+                variant="rounded"
+                alt={markerInfo.title}
+                src={markerInfo.coverUrl}
+              />
+              <FlexBox
+                column
+                align="flex-start"
+                sx={{ maxWidth: "300px", overflow: "hidden" }}
+              >
+                <Typography sx={fontBold}>{markerInfo.title}</Typography>
+                <Typography sx={partOpacitySx} variant="subtitle2">
+                  {markerInfo.abstract}
+                </Typography>
+              </FlexBox>
+            </>
+          )}
         </FlexBox>
         <FlexBox gap={1}>
           <IconButton

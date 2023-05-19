@@ -41,15 +41,14 @@ const SignUp: React.FC = () => {
     const email = emailRef.current.value;
     const avatarUrl = avatarUrlRef.current.value;
 
-    const tempPermission = permissionRef.current.value;
-    const permissionMap = new Map<string, string>([
-      ["学生", "student"],
-      ["老师", "teacher"],
-      ["管理员", "admin"],
-    ]);
-    const permission = permissionMap.get(tempPermission);
+    const permission = permissionRef.current.value;
 
     if (!name || !permission || !password || !id || !email) {
+      console.log(name);
+      console.log(permission);
+      console.log(password);
+      console.log(id);
+      console.log(email);
       alert("带 * 的字段必须填写");
       return;
     }

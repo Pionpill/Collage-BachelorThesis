@@ -15,7 +15,6 @@
         (我的信息) as my
         (上传) as update
 
-        rectangle 首页 {
             home ..> (按需推送):<<include>>
             home ..> (模型查找):<<include>>
             home ..> (模型显示):<<include>>
@@ -23,32 +22,19 @@
 
             (模型信息) <.. (简略信息):<<include>>
             (模型信息) <.. (详细信息):<<include>>
-        }
 
-        rectangle 预览 {
             preview ..> (模型调整):<<include>>
 
             (模型调整) <.. (交互调整):<<extend>>
             (模型调整) <.. (数值调整):<<extend>>
-        }
 
-        rectangle 识别 {
             identify ..> (交互模型):<<include>>
             identify ..> (场景信息):<<include>>
-        }
 
-        rectangle 我的 {
-            my ..> (信息增改):<<include>>
-            my ..> (推荐服务):<<include>>
-            my ..> (设置):<<include>>
-        }
+            my ..> (信息查询):<<include>>
+            my ..> (用户设置):<<include>>
 
-        rectangle 上传 {
           update ..> (上传模型):<<include>>
-          update ..> (上传 AR 识别信息):<<include>>
-          (上传 AR 识别信息) <.. (图像识别信息):<<include>>
-          (上传 AR 识别信息) <.. (标记捕捉信息):<<include>>
-        }
 
     }
 

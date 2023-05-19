@@ -4,11 +4,35 @@
 
 \subsubsection{用户认证}
 
-用户认证包含登录界面，注册界面，信息修改界面。
+用户认证包含登录界面，注册界面，用户资料界面。
 
-用户进入系统将自动进入欢迎界面，在该界面中，用户可以选择登录，注册或以游客身份登录。如果以游客身份登录则直接进入系统，使用一个内置的账户，仅提供体验功能，无法与后端进行交互。
+用户进入系统将自动进入欢迎界面，在该界面中，用户可以选择登录，注册或以游客身份登录。如果以游客身份登录则直接进入系统，使用一个前端内置的账户，仅提供体验功能，无法与后端进行交互。
 
-登录界面提供最基础的登录服务，可通过密码和账户名或邮箱名登录。用户也可将登录记录保留在本地，在有效时间内均可自动进入系统。此外界面也可跳转到注册界面或直接以游客身份进入系统，登录界面如图\ref{fig:登录界面}所示:
+登录界面提供基础的登录服务，可通过密码和账户名或邮箱名登录。用户勾选``记住我''选项后可将登录记录保留在本地，在有效时间内均可自动进入系统。如果用户直接进入系统，系统会调用浏览器 localhost 数据判断用户近期是否有登录记录，如果有且满足登录条件则自动登录，否则使用游客账户进入系统，代码如下:
+
+\begin{JavaScript}
+const getInitUserId = (): string => {
+  // 判断上次登录时间是否在一周内
+  const checkLoginData = (loginData: Date): boolean => {
+    const now = new Date();
+    const spanDay = getTimeSpan(now, loginData);
+    return spanDay <= 7;
+  };
+  const userId = localStorage.getItem("userId");
+  const lastLoginDate = localStorage.getItem("lastLoginDate");
+  // 存在用户记录且满足自动登录条件
+  if (
+    userId !== null &&
+    lastLoginDate !== null &&
+    checkLoginData(new Date(lastLoginDate))
+  )
+    return userId;
+  // 不存在，则用游客身份登录
+  else return "visitor";
+};
+\end{JavaScript}
+
+此外界面也可跳转到注册界面或直接以游客身份进入系统，登录界面如图\ref{fig:登录界面}所示:
 
 \begin{figure}[H]
   \small
@@ -22,7 +46,6 @@
       \draw [Circle-] (-1.75,-0.8) -- (-3,-0.8) node [left] {输入密码};
       \draw [Circle-] (-1.75,-1.5) -- (-3,-1.5) node [left] {点击提交表单};
       \draw [Circle-] (-1.75,-2.1) -- (-3,-2.1) node [left] {localstroge 登录记录};
-      \draw [Circle-] (1.75,-2.1) -- (3,-2.1) node [right] {重制密码};
       \draw [Circle-] (-1.75,-2.9) -- (-3,-2.9) node [left] {跳过登录，进入系统};
       \draw [Circle-] (-1.75,-3.3) -- (-3,-3.3) node [left] {进入注册界面};
     \end{scope}
@@ -31,7 +54,48 @@
   \label{fig:登录界面}
 \end{figure}
 
-注册界面提供新用户注册功能，注册逻辑与常用手机 app 相同，必填数据选以 * 标注，注册界面如图\ref{fig:注册界面}所示:
+注册界面提供新用户注册功能，注册逻辑与常用手机 app 相同，必填数据选以 * 标注。后端获取注册数据后会进行如下判断: 用户是否已被注册，用户的权限组是否匹配。注册逻辑代码如下所示:
+
+\begin{Java}
+public RespBean registry(RegistryDTO registryDTO) {
+    Long id = registryDTO.getId();
+    String name = registryDTO.getName();
+    String password = RSAUtils.decrypt(registryDTO.getPassword());
+    String permission = registryDTO.getPermission();
+    String email = registryDTO.getEmail();
+    String avatarUrl = registryDTO.getAvatarUrl();
+    System.out.println(password);
+    // 数据库存在同名用户
+    if (hasName(name))
+    return RespBean.error("该用户名已被注册，请换一个");
+    // 邮箱已被注册
+    if (hasEmail(email))
+    return RespBean.error("该邮箱已被注册");
+    // 该 id 已经被注册
+    if (userRepository.findById(id).isPresent())
+        return RespBean.error("该编号对应的账户已注册");
+    // 验证校园表用户权限
+    Optional<UniversityUser> universityUser = universityUserRepository.findById(id);
+    System.out.println(permission);
+    if (!universityUser.isPresent())
+        return RespBean.error("校园系统中不存在此学号/编号");
+    else if (!universityUser.get().getIdentity().equals(permission))
+        return RespBean.error("权限不匹配");
+    // 注册用户
+    Timestamp createTime = new Timestamp(System.currentTimeMillis());
+    User newUser = User.builder().id(
+            id).name(name)
+            .password(password).permission(permission)
+            .email(email).avatarUrl(avatarUrl).createTime(createTime).updateTime(createTime).build();
+    System.out.println(newUser);
+    userRepository.save(newUser);
+    return RespBean.success("注册成功!");
+}
+\end{Java}
+
+
+
+注册界面如图\ref{fig:注册界面}所示:
 
 \begin{figure}[H]
   \small
@@ -41,16 +105,16 @@
       \node () at (-7,0) {};
       \node () at (7,0) {};
       \node [draw=black!60] (fig) at (0,0) {\includegraphics[width=4cm]{./figs/registry.jpg}};
-      \draw [Circle-] (-1.75,0) -- (-3,0) node [left] {必填数据段，* 标识};
-      \draw [Circle-] (-1.75,-0.9) -- (-3,-0.9) node [left] {可选数据段};
-      \draw [Circle-] (-1.75,-2.8) -- (-3,-2.8) node [left] {注册按钮，提交表单};
+      \draw [Circle-] (-1.75,-0.5) -- (-3,-0.5) node [left] {必填数据段，* 标识};
+      \draw [Circle-] (-1.75,-2.5) -- (-3,-2.5) node [left] {可选数据段};
+      \draw [Circle-] (-1.75,-3.3) -- (-3,-3.3) node [left] {注册按钮，提交表单};
     \end{scope}
   \end{tikzpicture}
   \caption{注册界面}
   \label{fig:注册界面}
 \end{figure}
 
-我的界面向用户展示个人信息，同时提供一些快捷服务，用户可以在此修改个人信息，我的界面如图\ref{fig:我的界面}所示:
+用户资料界面用于显示个人信息，同时提供一些快捷服务，用户可以在此修改个人信息。当用户点击``收藏''等按钮时，界面将弹出提示框，同时向后端发送数据请求，然后显示对应的数据。用户资料界面如图\ref{fig:用户资料界面}所示:
 
 \begin{figure}[H]
   \small
@@ -66,21 +130,44 @@
       \draw [Circle-] (0.25,1.75) -- (3,1.75) node [right] {社区信息，点击可查看列表};
       \draw [Circle-] (1.75,1) -- (3,1) node [right] {活动面板，展示主要活动或提示};
       \draw [Circle-] (-1.75,0) -- (-3,0) node [left] {一些服务的快捷链接};
-      \draw [Circle-] (-1.75,-1.25) -- (-3,-1.25) node [left] {设置，可展开};
+      \draw [Circle-] (-1.75,-2) -- (-3,-2) node [left] {设置项};
       \draw [Circle-] (-1.75,-4) -- (-3,-4) node [left] {其他模块链接};
     \end{scope}
   \end{tikzpicture}
-  \caption{我的界面}
-  \label{fig:我的界面}
+  \caption{用户资料界面}
+  \label{fig:用户资料界面}
 \end{figure}
 
 \subsubsection{数据推送}
 
 数据推送模块包含首页界面。
 
-用户进入首页可根据需求选择分区: ``为你推荐'', ``最新更新'', ``我的关注''。后端将根据用户选择采用对应算法传输可用数据到前端。同时用户也可手动搜索内容。
+用户进入首页可根据需求选择分区: ``为你推荐'', ``最新更新'', ``我的关注''。后端将根据用户选择采用对应算法传输可用数据到前端。同时用户也可手动搜索内容。显示主体内容的代码如下所示:
 
-主页瀑布流中将显示各个模型的简要信息，包括预览图片，名称，作者等，用户点击对应卡片即可预览 3D 模型。``主页''界面如图\ref{fig:主页界面}所示:
+\begin{JavaScript}
+const initModels = async () => {
+  let promise;
+  let data: ModelApiType[] = [];
+  // 如果存在搜索内容，显示搜索内容
+  if (searchContext) promise = searchModelsByTitleApi(searchContext);
+  // 不存在搜索内容，显示分区内容
+  else {
+    // 获取推荐内容
+    if (tab === HomeTab.recommend) promise = getRecommendModelApi();
+    // 获取最新更新内容
+    if (tab === HomeTab.new) promise = getLatestModelApi();
+    // 获取用户订阅的内容
+    if (tab === HomeTab.star) promise = getSubscribeModelApi(userId);
+  }
+  // 等待后端数据传输
+  if (promise) data = (await (await promise).json()).data;
+  const modelsArray = await modelAdapter(data);
+  // 设置内容
+  setModels(modelsArray);
+};
+\end{JavaScript}
+
+主页界面中将显示各个模型的简要信息，包括预览图片，名称，作者等，用户点击对应卡片即可预览 3D 模型。``主页''界面如图\ref{fig:主页界面}所示:
 
 \begin{figure}[H]
   \small
@@ -107,6 +194,67 @@
   \label{fig:主页界面}
 \end{figure}
 
+\subsubsection{数据上传}
+
+数据上传包含``上传''界面。
+
+用户在下方点击加号按钮后点击模型上传即可进入``上传''界面，仅有管理员用户可进入该界面，其他用户尝试进入则会发出警告。
+
+模型上传需填写必要数据，然后点击最下方的``预览按钮''，系统会渲染通过用户在表单中填入的数据渲染模型。用户根据预览效果选择上传模型或继续修改。
+
+后端在接受到数据后会自行判断是否存在控制数据，如果存在则在模型控制表中添加内容，并将其关联到模型上。后端创建模型的代码如下:
+
+\begin{Java}
+public RespBean uploadModel(ModelUploadDTO dto) {
+    Long modelControlId = null;
+    // 存在控制信息
+    if (dto.hasControl()) {
+        ModelControl newModelControl = ModelControl.builder().autoRotateSpeed(dto.getAutoRotateSpeed())
+                .background(dto.getBackground()).preset(dto.getPreset()).blur(dto.getBlur())
+                .speed(dto.getSpeed()).rotationIntensity(dto.getRotationIntensity())
+                .floatIntensity(dto.getFloatIntensity()).build();
+        // 存入控制信息，同时获得 id
+        newModelControl = modelControlRepository.save(newModelControl);
+        modelControlId = newModelControl.getId();
+    }
+    // 创建模型，将控制信息 id 存入模型数据
+    Model newModel = Model.builder().modelUrl(dto.getModelUrl()).coverUrl(dto.getCoverUrl())
+            .title(dto.getTitle())
+            .abstractInfo(dto.getInfo()).authorId(dto.getAuthorId())
+            .controlId(modelControlId).build();
+    modelRepository.save(newModel);
+    return RespBean.success("成功上传模型");
+}
+\end{Java}
+
+上传界面如图\ref{fig:上传界面}所示:
+
+\begin{figure}[H]
+  \small
+  \centering
+  \begin{tikzpicture}[font=\footnotesize]
+    \node () at (-7,0) {};
+    \node () at (7,0) {};
+    \begin{scope}[xshift=-2.25cm]
+      \node [draw=black!60] (fig) at (0,0) {\includegraphics[width=4cm]{./figs/upload.jpg}};
+      \draw [Circle-] (1.5,3.75) -- (-3,3.75) node [left] {操作提示};
+      \draw [Circle-] (-1.75,2.5) -- (-3,2.5) node [left] {必要上传数据};
+      \draw [Circle-] (-1.5,-1) -- (-3,-1) node [left] {可选上传数据};
+      \draw [Circle-] (-1.75,-4) -- (-3,-4) node [left] {其他模块链接};
+    \end{scope}
+    \begin{scope}[xshift=2.25cm]
+      \node () at (-7,0) {};
+      \node () at (7,0) {};
+      \node [draw=black!60] (fig) at (0,0) {\includegraphics[width=4cm]{./figs/upload-2.jpg}};
+      \draw [Circle-] (1.5,-2.65) -- (3,-2.65) node [right] {确认或返回};
+      \draw [Circle-] (0,1.6) -- (3,1.6) node [right] {模型预览效果};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{上传界面}
+  \label{fig:上传界面}
+\end{figure}
+
+
 \subsection{核心功能实现}
 \subsubsection{WebGL 模块}
 
@@ -119,7 +267,49 @@ WebGL 模块包含模型预览界面。
   \item 模型信息: 系统向后端请求模型的文本，点赞，作者等信息。
 \end{itemize}
 
-其中搭建场景，显示模型信息的功能同步进行，模型数据异步请求。
+其中搭建场景，显示模型信息的功能同步进行，模型数据异步请求。前端请求数据，前端请求模型及其相关数据的代码如下:
+
+\begin{JavaScript}
+const initModel = async (id: string) => {
+  // 获取模型基本数据
+  let modelApiDate: ModelApiType | null = null;
+  await (await getModelByIdApi(id)).json().then((response) => {
+    modelApiDate = response.data;
+  });
+  // 查询模型被喜欢的数量
+  let likeCount = 0;
+  await (await getModelLikeCountsApi(String(modelApiDate!.id)))
+    .json()
+    .then((response) => (likeCount = response.data));
+  // 将后端数据转换为前端数据
+  const modelData: ThreeModelFields = {
+    id: String(modelApiDate!.id),
+    ......
+  };
+  // 获取模型作者信息
+  const author = (await getUserById(String(modelApiDate!.authorId))) as User;
+  const userData: UserShortFields = {
+    id: author.id,
+    ......
+  };
+  // 获取模型控制信息
+  let modelControlApiDate: ModelControlApiType = {
+    id: 0,
+    ......
+  };
+  await (await getModelByIdApi(id)).json().then((response) => {
+    modelControlApiDate = response.data;
+  });
+  // 将后端控制信息转换为前端数据
+  const controlDate = modelControlApiDate as CommonControlFields &
+    EnvironmentFields & FloatFields;
+  // 创建模型实例
+  const model: ThreeModel = ThreeModel.fromJson(modelData,userData,controlDate);
+  // 设置模型信息
+  setModel(model);
+};
+\end{JavaScript}
+
 
 预览界面将模型信息分为简要信息与详细信息，简要信息仅以浮动卡片形式显现，用户可隐藏相关信息。详细信息则无法隐藏。用户在移动设备上可通过触摸移动位置，双指缩放模型大小，也可以通过控制板调整环境信息，例如背景贴图，背景模糊程度。模型预览界面如图\ref{fig:模型预览界面}所示:
 
@@ -223,14 +413,76 @@ AR 提示界面如图\ref{fig:AR提示界面}所示:
       \draw [Circle-] (1.75,3) -- (3,3) node [right] {设置模型位置参数};
       \draw [Circle-] (1.75,2) -- (3,2) node [right] {设置模型旋转参数};
       \draw [Circle-] (1.75,1.3) -- (3,1.3) node [right] {设置模型尺寸};
-      \draw [Circle-] (-1.4,1) -- (3,1) node [right] {在 AR 模式中显示};
     \end{scope}
   \end{tikzpicture}
   \caption{AR预览界面}
   \label{fig:AR预览界面}
 \end{figure}
 
-进入 AR 识别界面后，系统首先会加载常规标记数据，如何通过设备地理位置在数据库中查找改区域内的标记加载。加载完所有标记数据后，系统实时匹配摄像机传输的图像，如果匹配上对应的标记，界面将弹出简略信息卡。AR 识别界面如图\ref{fig:AR识别界面}所示:
+进入 AR 识别界面后，系统首先会加载常规标记数据，同时尝试访问设备定位权限，如果成功获取定位信息，加载地理区域内的特定标记数据。
+
+AR 识别功能支持的两种识别技术优缺点如下:
+\begin{itemize}
+  \item 标记捕捉: 图形具有特定要求，数据量小，适合较普遍的现实图像。
+  \item 图像识别: 数据量大，可识别任何特想，适合特殊的现实图像。
+\end{itemize}
+
+系统使用标记捕捉技术识别常规图像，进入系统后则加载所有的标记捕捉数据。系统主要使用图像识别技术识别特定场景，例如图书馆，名人雕像等。由于图像识别需要大量数据，因此系统仅加载区域内数据，具体实现上根据地理坐标加载。
+
+前端尝试获取定位信息，加载常规标记数据和地理区域内特定标记数据的代码如下所示:
+
+\begin{JavaScript}
+const initMarkerData = () => {
+  // 成功获取定位的回调函数: 向后端请求常规数据和区域内特定数据
+  const successCallBack = async (data: any) => {
+    const lon = data.coords.longitude;
+    const lat = data.coords.latitude;
+    const markers: Marker[] = [];
+    // 请求特定数据
+    await (await getMarkersByGeoApi(lon, lat))
+    .json()
+    .then(async (response) => {
+      const markersApiData: MarkerApiType[] = response.data;
+      for (const markerApiData of markersApiData) {
+        const marker = await markerAdapter(markerApiData);
+        markers.push(marker);
+        }
+        });
+    // 请求常规数据
+    await (await getCommonMarkersApi()).json().then(async (response) => {
+      const markersApiData: MarkerApiType[] = response.data;
+      for (const markerApiData of markersApiData) {
+        const marker = await markerAdapter(markerApiData);
+        markers.push(marker);
+      }
+    });
+    setMarkers(markers);
+    setInit(true);
+  };
+  // 获取定位失败的回调函数: 仅仅向后端请求常规数据
+  const errorCallBack = async () => {
+    // 代码和成功回调函数的请求常规数据类似
+    ......
+  };
+  // 获取定位数据
+  navigator.geolocation.getCurrentPosition(successCallBack, errorCallBack);
+};
+\end{JavaScript}
+
+针对地理区域内特定标记数据，后端会在数据库中根据经纬度坐标进行判断，默认加载偏差在 2km 内的特定数据(即对应经纬度 0.02 内的数据)，后端代码如下:
+
+\begin{JavaScript}
+@Override
+public RespBean getMarkersByGeo(Float lon, Float lat) {
+    // 范围: 0.01 经纬度，即 1km
+    Float len = 0.01f;
+    List<Marker> markersList = markerRepository.findAllByLonBetweenAndLatBetween(
+        lon - len, lon + len, lat - len, lat + len);
+    return RespBean.success("获取识别标记数据", markersList);
+}
+\end{JavaScript}
+
+加载完所有标记数据后，系统实时匹配摄像机传输的图像，如果匹配上对应的标记，界面将弹出简略信息卡，用户点击即可查看详细信息。如果存在模型会在标记法线上方显示模型。AR 识别界面如图\ref{fig:AR识别界面}所示:
 
 \begin{figure}[H]
   \small

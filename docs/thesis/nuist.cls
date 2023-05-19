@@ -24,7 +24,7 @@
 \renewcommand{\kaishu}{\CJKfamily{localkaishu}}
 
 \setmainfont{Times New Roman}
-\setmonofont{Times New Roman}
+\setmonofont{Consolas}[Scale=0.95]
 % \usepackage{times}
 % 其他的一些数学字体，可酌情使用
 % \usepackage{unicode-math}
@@ -344,3 +344,160 @@
 \usepackage{pgf-umlsd}              % 顺序图
 \usepackage{threeparttable}         % 三线表
 \usepackage{caption}                % 图表标题
+
+\definecolor{vscode-light-blue}{RGB}{0,0,255}
+\definecolor{vscode-light-pink}{RGB}{175,0,219}
+\definecolor{vscode-light-orange}{RGB}{163,21,21}
+\definecolor{vscode-light-lightorange}{RGB}{121,94,38}
+\definecolor{vscode-light-green}{RGB}{0,128,0}
+
+\definecolor{vscode-dark-blue}{RGB}{86,156,214}
+\definecolor{vscode-dark-green}{RGB}{78,201,176}
+\definecolor{vscode-dark-pink}{RGB}{197,134,192}
+\definecolor{vscode-dark-orange}{RGB}{206,145,120}
+\definecolor{vscode-dark-cyan}{RGB}{156,220,254}
+\definecolor{vscode-dark-yellow}{RGB}{220,220,170}
+
+\definecolor{custom-blue}{RGB}{0,119,170}
+\definecolor{custom-red}{RGB}{221,74,104}
+\definecolor{custom-green}{RGB}{80,161,79}
+\definecolor{custom-darkorange}{RGB}{152,104,1}
+
+% 定义 JavaScript 语言
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, let, const, document},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+% 设置代码的默认样式
+\lstset{
+	frame=none,                                     % 取消边框
+	breaklines=true,                                % 允许自动断行
+	% breakatwhitespace=true,                       % 使用此命令仅允许在空格处自动断行
+	showstringspaces=false,                         % 不显示字符串中的空格
+	basicstyle=\small\ttfamily,                     % 设置代码基本样式
+	flexiblecolumns=true,                           % 改善字母间距
+	keywordstyle=\color{blue},                      % 设置关键词样式
+	stringstyle=\color[rgb]{0.75,0,0.75},           % 设置字符串样式
+	commentstyle=\songti\color[rgb]{0,0.5,0},       % 设置注释样式
+	tabsize=4,                                      % 设置制表符缩进
+    columns=flexible,                               % 不随便添加空格
+}
+
+% 设置 JavaScript 代码风格
+\lstset{
+    frame=l,
+    backgroundcolor=\color{lightgray!10},
+    language=JavaScript,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    basicstyle={\footnotesize\ttfamily},
+    keywordstyle=\color{custom-blue},
+    commentstyle=\color{custom-green},
+    stringstyle=\color{vscode-light-orange},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=2,
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\tiny\color{gray}\ttfamily,
+    stepnumber=1,
+    flexiblecolumns,   
+    breaklines=true,
+    basewidth=0.5em,
+    numbersep=10pt,
+    xleftmargin=40pt,
+}
+
+% 设置 JavaScript 代码环境
+\lstnewenvironment{JavaScript}[1][]{
+	\lstset{
+        frame=l,
+        backgroundcolor = \color{lightgray!10},
+        language=JavaScript,
+        aboveskip=3mm,
+        belowskip=3mm,
+        showstringspaces=false,
+        basicstyle={\footnotesize\ttfamily},
+        keywordstyle=\color{custom-blue},
+        commentstyle=\color{custom-green},
+        stringstyle=\color{vscode-light-orange},
+        breaklines=true,
+        breakatwhitespace=true,
+        tabsize=2,
+        numbers=left,
+        numbersep=5pt,
+        numberstyle=\tiny\color{gray}\ttfamily,
+        stepnumber=1,
+        flexiblecolumns,   
+        breaklines=true,
+        basewidth=0.5em,
+        numbersep=10pt,
+        xleftmargin=40pt,
+	}
+}{}
+
+% 设置 Java 代码风格
+\lstset{
+    frame=l,
+    backgroundcolor=\color{lightgray!10},
+    language=Java,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    basicstyle={\footnotesize\ttfamily},
+    keywordstyle=\color{custom-blue},
+    commentstyle=\color{custom-green},
+    stringstyle=\color{custom-red},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=2,
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\tiny\color{gray}\ttfamily,
+    stepnumber=1,
+    flexiblecolumns,   
+    breaklines=true,
+    basewidth=0.5em,
+    numbersep=10pt,
+    xleftmargin=40pt,
+}
+
+% 设置Java代码环境
+\lstnewenvironment{Java}[1][]{
+	\lstset{
+        frame=l,
+        backgroundcolor = \color{lightgray!10},
+        language=Java,
+        aboveskip=3mm,
+        belowskip=3mm,
+        showstringspaces=false,
+        basicstyle={\footnotesize\ttfamily},
+        keywordstyle=\color{custom-blue},
+        commentstyle=\color{custom-green},
+        stringstyle=\color{custom-red},
+        breaklines=true,
+        breakatwhitespace=true,
+        tabsize=2,
+        numbers=left,
+        numbersep=5pt,
+        numberstyle=\tiny\color{gray}\ttfamily,
+        stepnumber=1,
+        flexiblecolumns,   
+        breaklines=true,
+        basewidth=0.5em,
+        numbersep=10pt,
+        xleftmargin=40pt,
+	}
+}{}

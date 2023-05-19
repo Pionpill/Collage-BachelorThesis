@@ -7,10 +7,16 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMarkerInfoByMarkerIdApi } from "../../../api/markerApi";
+import {
+  MarkerInfoApiType,
+  getMarkerInfoByMarkerIdApi,
+} from "../../../api/markerApi";
+import { getUserById } from "../../../api/userApi";
 import AbstractCard from "../../../components/AbstractCard";
 import FlexBox from "../../../components/FlexBox";
-import MarkerInfo from "../../../models/MarkerInfo";
+import MarkerInfo, { MarkerInfoFields } from "../../../models/MarkerInfo";
+import User from "../../../models/User";
+import { UserShortFields } from "../../../models/UserShort";
 import { RootState } from "../../../store";
 import { changeIdentifyInfoCard } from "../../../store/features/identifySlice";
 import { fontBold } from "../../../styles/macro";
@@ -25,7 +31,27 @@ const InfoCard: React.FC = () => {
   const initMarkerInfo = async () => {
     (await getMarkerInfoByMarkerIdApi(markerId))
       .json()
-      .then((response) => console.log(response.data));
+      .then(async (response) => {
+        const markerInfoApiDate: MarkerInfoApiType = response.data;
+        const author = (await getUserById(
+          String(markerInfoApiDate!.authorId)
+        )) as User;
+        const userData: UserShortFields = {
+          id: author.id,
+          name: author.name,
+          avatarUrl: author.avatarUrl,
+        };
+        const markerInfoData: MarkerInfoFields = {
+          location: markerInfoApiDate.location,
+          introduction: markerInfoApiDate.detailInfo,
+          coverUrl: markerInfoApiDate.coverUrl,
+          title: markerInfoApiDate.title,
+          abstract: markerInfoApiDate.abstractInfo,
+          id: String(markerInfoApiDate.id),
+        };
+        const markerInfo = MarkerInfo.fromJson(markerInfoData, userData);
+        setMarkerInfo(markerInfo);
+      });
   };
 
   React.useEffect(() => {

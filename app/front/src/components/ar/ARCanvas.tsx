@@ -60,7 +60,6 @@ const ARCanvas: ARCanvasProps = ({
           matrixCodeType: "3x3",
           maxDetectionRate: 60,
           imageSmoothingEnabled: true,
-
           patternRatio: 0.5,
         }}
         onCameraStreamReady={onCameraStreamReady}

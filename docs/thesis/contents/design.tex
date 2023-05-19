@@ -6,7 +6,7 @@
 
 \subsubsection{系统架构设计}
 
-系统基于 B/S 架构开发，核心功能位于浏览器端，后端仅提供必要的数据服务。用户通过浏览器端发起数据请求，服务器端负责处理请求后返回必要数据，浏览器再通过核心的 WebGL 与 AR 技术展示结果。
+系统基于 B/S 架构开发，核心功能位于浏览器端，后端仅提供必要的数据服务。用户通过浏览器端发起数据请求，服务器端负责处理请求后返回必要数据，浏览器再通过 WebGL 与 AR 技术展示结果\cite{zhang2015remote}。
 
 本系统的整体设计架构如图\ref{fig:系统架构设计图}所示:
 
@@ -24,9 +24,9 @@
     \begin{scope}[xshift=2.75cm]
       \node [draw=orange, dashed, minimum width=2cm, minimum height=3.5cm] (front) at (0,0.25) {};
       \node [font=\footnotesize] at (0,1.7) {前端};
-      \node [block, color=white, fill=orange!60] at (0,1) {前端模块};
-      \node [block, color=white, fill=orange!60] at (0,0) {前端模块};
-      \node [block, color=white, fill=orange!60] at (0,-1) {前端模块};
+      \node [block, color=white, fill=orange!60] at (0,1) {前端组件};
+      \node [block, color=white, fill=orange!60] at (0,0) {前端组件};
+      \node [block, color=white, fill=orange!60] at (0,-1) {前端组件};
       \node [block, color=white, fill=green!60!black] (cos) at (0,3.5) {COS 存储桶};
     \end{scope}
     \begin{scope}[xshift=6.25cm]
@@ -35,7 +35,7 @@
       \node [block, color=white, fill=red!60] at (0,1) {后端接口};
       \node [block, color=white, fill=red!60] at (0,0) {后端接口};
       \node [block, color=white, fill=red!60] at (0,-1) {后端接口};
-      \node [block, color=white, fill=red!60] (terminalDevice) at (0,3.5) {终端设备};
+      \node [block, color=white, fill=red!60] (terminalDevice) at (0,3.5) {服务器};
       \draw [Stealth-Stealth] (terminalDevice) -- (back);
     \end{scope}
     \begin{scope}[xshift=10cm, yshift=0.25cm]
@@ -59,7 +59,7 @@
 
 在技术选择的过程中，需要考虑技术适用性，开发难度，成本，社区生态，安全性，可维护性。综合考量，本系统使用如下主流技术。
 
-前端采用 React 框架，该框架能带来诸多优势。例如组件化开发，可以将 AR 组件和 WebGL 组件封装成可复用的组件，便于开发和维护。这样可以提高开发效率，减少代码重复。虚拟 DOM 技术可以实现高效的页面渲染和更新。在 AR 校园交互系统中，不同的 AR 场景需要不断地更新，React 可以通过虚拟 DOM 技术帮助我们快速更新渲染。React 生态系统有许多开源库和工具，可以帮助我们更快地开发 AR 校园交互系统。例如，React Three Fiber 可以将 React 和 Three.js 集成起来，帮助我们更容易地实现 3D 场景和特效。React 提供了一种清晰的数据流管理方式，即单向数据流。在 AR 校园交互系统中，我们可以将 AR 组件和 WebGL 组件所需要的数据通过 props 传递到组件中，这样可以更好地管理组件之间的数据流动。在 React 作为前端骨干框架的基础上，前端还是用到了如下组件:
+前端采用 React 框架，该框架能带来诸多优势。例如组件化开发，可以结合 AR 技术和 WebGL 技术封装可复用的组件，便于开发和维护。这样可以提高开发效率，减少代码重复。虚拟 DOM 技术可以实现高效的页面渲染和更新。在 AR 校园交互系统中，不同的 AR 场景需要不断地更新，React 可以通过虚拟 DOM 技术帮助我们快速更新渲染\cite{gackenheimer2015introduction}。React 生态系统有许多开源库和工具，可以帮助我们更快地开发 AR 校园交互系统。例如，React Three Fiber 可以将 React 和 Three.js 集成起来，帮助我们更容易地实现 3D 场景和特效。在 React 作为前端骨干框架的基础上，前端使用了如下组件:
 \begin{itemize}
   \item MaterialUI: 提供响应式UI组件，具备极佳的动画效果与样式自定义系统。
   \item Redux: 提供公有数据的统一管理，便于 vDOM 中各个层级组件之间交互数据。
@@ -67,17 +67,17 @@
   \item fetch: ES6 提供的 http 请求 API。浏览器原生支持，无需额外封装 HttpRequest 请求。
 \end{itemize}
 
-后端框架采用 SpringBoot 框架，SpringBoot 框架可以快速构建应用程序，并且可以使用自动配置功能快速集成各种库和服务。这意味着可以更快地开发出高效、可靠的后端应用程序。强大的生态系统：SpringBoot 框架有着庞大的生态系统，拥有许多插件和第三方库，可以帮助开发人员更好地开发应用程序。在 SpringBoot 作为核心后端框架的基础上，后端还用到了如下组件:
+后端框架采用 SpringBoot 框架，SpringBoot 框架可以快速构建应用程序，并且可以使用自动配置功能快速集成各种库和服务。这意味着可以更快地开发出高效、可靠的后端应用程序。强大的生态系统：SpringBoot 框架有着庞大的生态系统，拥有许多插件和第三方库，可以帮助开发人员更好地开发应用程序\cite{guntupally2018spring}。在 SpringBoot 作为核心后端框架的基础上，后端还用到了如下组件/技术:
 \begin{itemize}
   \item Spring Data JPA: 全 ORM 框架，能够非常方便快捷地与 SpringBoot 框架融合，提供了便捷的操作数据库的接口。
   \item MySQL: 免费开源的关系型数据库，拥有企业级数据处理速度。
 \end{itemize}
 
-在核心功能上，WebGL 采用 three.js 组件实现，考虑到前端主要框架是 React，因此采用 @react-three 组件，使用 JSX 语法进行开发。@react-three 可以完美融合进 React 框架，可以轻松地与 React,Redux,MaterialUI 集成。@react-three 可以通过 React 组件化的思路来创建 3D 场景。开发者可以使用熟悉的 React API 来管理 3D 对象和动画，并可以在 React 应用中轻松地嵌入 Three.js 场景，从而简化了开发流程。AR 功能则采用 ar.js 组件，由于该组件无法直接通过 JSX 语法嵌入 React 组件，系统为其添加了 ts 类型并进一步封装成 JSX 组件。
+在核心功能上，WebGL 采用 three.js 组件实现，考虑到前端主要框架是 React，因此采用 @react-three 组件，使用 JSX 语法进行开发。@react-three 可以完美融合进 React 框架，可以轻松地与 React,Redux,MaterialUI 集成。@react-three 可以通过 React 组件化的思路来创建 3D 场景。开发者可以使用熟悉的 React API 来管理 3D 对象和动画，并可以在 React 应用中轻松地嵌入 Three.js 场景，从而简化了开发流程\cite{mysore2021splunk+}。AR 功能则采用 AR.js 组件，由于该组件无法直接通过 JSX 语法嵌入 React 组件，本系统编写了相应的 React 组件以适用系统整体开发风格。
 
 \subsubsection{功能模块设计}
 
-系统的模块可大致划分为: 基础功能模块，核心功能模块。其中基础功能模块包括登陆注册，用户权限管理，数据请求筛选等功能。核心功能模块利用 WebGL 与 AR 技术打造交互系统。其中 WebGL 功能模块以 WebGL 技术为核心，采用 three.js 组件实现 3D 模型的展示与交互功能。AR 功能模块以 WebGL 技术为基础，以 ar.js 为核心，采用图像识别与标记捕捉算法捕捉摄像机图像数据完成增强现实功能。功能模块的结构图如图\ref{fig:功能模块结构图}所示:
+系统的模块可大致划分为: 基础功能模块，核心功能模块。其中基础功能模块包括登陆注册，用户权限管理，数据请求筛选等功能。核心功能模块利用 WebGL 与 AR 技术打造交互系统。其中 WebGL 功能模块以 WebGL 技术为核心，采用 three.js 组件实现 3D 模型的展示与交互功能。AR 功能模块以 WebGL 技术为基础，以 AR.js 为核心，采用图像识别与标记捕捉算法捕捉摄像机图像数据完成增强现实功能。功能模块的结构图如图\ref{fig:功能模块结构图}所示:
 
 \begin{figure}[H]
   \small
@@ -94,8 +94,7 @@
       \node [draw, text width=1em, text centered] (info) at (-1.25,-3.5) {信息增改};
       \node [draw, text width=1em, text centered] (push) at (-0.375,-3.5) {模型推送};
       \node [draw, text width=1em, text centered] (search) at (0.375,-3.5) {模型查询};
-      \node [draw, text width=1em, text centered] (model) at (1.625,-3.5) {模型上传};
-      \node [draw, text width=1em, text centered] (arData) at (2.375,-3.5) {ar数据上传};
+      \node [draw, text width=1em, text centered] (model) at (2,-3.5) {模型上传};
     \end{scope}
     \begin{scope}[xshift=3cm]
       \node [draw] (core) at (0,0) {核心功能};
@@ -119,7 +118,6 @@
     \draw (screen) -- ++(0,-0.5) -| (push);
     \draw (screen) -- ++(0,-0.5) -| (search);
     \draw (update) -- ++(0,-0.5) -| (model);
-    \draw (update) -- ++(0,-0.5) -| (arData);
     \draw (webgl) -- ++(0,-0.5) -| (showModel);
     \draw (webgl) -- ++(0,-0.5) -| (operateModel);
     \draw (ar) -- ++(0,-0.5) -| (arPreview);
@@ -131,7 +129,7 @@
 
 \subsubsection{数据库设计}
 
-系统将文本数据存储在关系型数据库 MySQL 中，非文本数据(图像，模型等)存储在 COS 对象存储桶中。本系统共需标记表，标记信息表，模型表，学校人员表，用户表，收藏表，粉丝表，关注表共九张表。各表介绍如下:
+系统将文本数据存储在关系型数据库 MySQL 中，非文本数据(图像，模型等)存储在 COS 对象存储桶中。本系统共需标记表，标记信息表，模型表，学校人员表，用户表，收藏表，粉丝表，关注表九张表。各表介绍如下:
 \begin{itemize}
   \item 标记表: 记录 AR 识别的标记信息。数据段包括标记类型，标记图像类型，标记图像对应 URL，前端需要显示的模型 Id，标记信息 Id 等。通过这个表系统将实时匹配摄像头传输来的信息进行图像匹配，匹配成功后根据对应模型 Id 或信息 Id 显示内容。
   \item 标记信息表: 记录对应标记的信息。主要记录标记物的信息，如物品名称，简要介绍，上传作者等。前端通过该表在匹配到标记后显示对应标记的信息。
@@ -146,7 +144,7 @@
 
 各数据表的详细字段信息如下:
 
-标记表记录图像识别标记信息，其中标记类型 (marker\_type) 分为常规标记(common)与区域标记(area)。所有常规标记都将一次性传输到用户设备中进行匹配，区域标记仅当用户设备定位达到条件时进行传输。标记文件类型(file\_type)对应图像识别或标记捕捉文件的类型。该表完整字段如表\ref{table:标记表}所示:
+标记表记录图像识别标记信息，其中标记类型 (marker\_type) 分为常规标记(common)与区域标记(area)。所有常规标记都将一次性传输到用户设备中进行匹配，区域标记根据用户设备的地理位置判断是否传输。标记文件类型(file\_type)对应图像识别或标记捕捉文件的类型。标记表完整字段如表\ref{table:标记表}所示:
 
 \begin{table}[H]
   \centering
@@ -165,13 +163,15 @@
     info\_id & bigint & × & 需要显示的标记信息， 对应标记信息表 id。 \\
     model\_id & bigint & × & 需要显示的模型 id, 对应模型表 id。 \\
     author\_id & bigint & × & 标记上传者的 id, 对应用户表 id。 \\
+    lat & float & × & 区域标记的地理经度。\\
+    lon & float & × & 区域标记的地理纬度。\\
     create\_time & datetime & √ & 标记创建的时间。 \\
     update\_time & datetime & √ & 标记更新的时间。 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-标记信息表记录对应标记的信息数据, 主要存储标记的文字介绍信息，该表完整字段如表\ref{table:标记信息表}所示:
+标记信息表记录与标记相关的信息数据, 主要存储标记的文字介绍信息，该表完整字段如表\ref{table:标记信息表}所示:
 
 \begin{table}[H]
   \centering
@@ -186,8 +186,8 @@
     id & bigint & √ & 主键，自增。 \\
     cover\_url & varchar(255) & √ & 标记信息的封面图。 \\
     title & varchar(20) & √ & 标记的名称或标题。 \\
-    abstract& varchar(255) & √ & 标记的简介。 \\
-    introduction & varchar(65535) & × & 标记的详细信息。 \\
+    abstract\_info& varchar(255) & √ & 标记的简介。 \\
+    detail\_info & varchar(65535) & × & 标记的详细信息。 \\
     author\_id & bigint & × & 标记上传者的 id, 对应用户表 id。 \\
     location & varchar(20) & × & 标记对应的地理位置。 \\
     create\_time & datetime & √ & 标记创建的时间。 \\
@@ -203,7 +203,7 @@
   \small
   \caption{模型表}
   \label{table:模型表}
-  \setlength{\tabcolsep}{10.2mm}
+  \setlength{\tabcolsep}{11mm}
   \begin{tabular}{l|l|c|l}
     \toprule
     \textbf{字段名称} & \textbf{字段类型} & \textbf{非空} & \textbf{描述} \\
@@ -211,9 +211,9 @@
     id & bigint & √ & 主键，自增。 \\
     cover\_url & varchar(255) & √ & 模型的封面图。 \\
     title & varchar(20) & √ & 模型的名称。 \\
-    like\_count & varchar(20) & √ & 模型被喜欢的人数。 \\
     abstract & varchar(255) & √ & 模型的介绍。 \\
     model\_url & varchar(255) & √ & 模型存储的地址。 \\
+    author\_id & bigint & × & 作者 id。 \\
     control\_id & bigint & × & 模型控制表 id。 \\
     create\_time & datetime & √ & 模型创建的时间。 \\
     update\_time & datetime & √ & 模型更新的时间。 \\
@@ -221,7 +221,7 @@
   \end{tabular}
 \end{table}
 
-模型控制表用于存储模型与环境的配置信息，由于控制信息仅在模型预览时会被使用，在 AR 预览与 AR 识别时仅需提供模型的基本信息即可，因此将模型表与模型控制表分离。该表完整字段如表\ref{table:模型控制表}所示:
+模型控制表用于存储模型与环境的配置信息，由于控制信息仅在模型预览时会被使用，在 AR 预览与 AR 识别时仅需提供模型的基本信息即可，因此将模型表与模型控制表分离。模型控制表完整字段如表\ref{table:模型控制表}所示:
 
 \begin{table}[H]
   \centering
@@ -237,10 +237,10 @@
     auto\_rotate\_speed & int & × & 模型自动旋转速度。 \\
     background & boolean & × & 模型是否需要环境背景。 \\
     preset & Enum(`sunset', `dawn',...) & × & 模型使用的环境背景。 \\
-    blur & number & × & 环境背景模糊程度。 \\
-    float\_speed & number & × & 模型浮动效果速度。 \\
-    rotation\_intensity & number & × & 模型浮动时自旋速度。 \\
-    float\_intensity & number & × & 模型浮动强度。 \\
+    blur & float & × & 环境背景模糊程度。 \\
+    float\_speed & float & × & 模型浮动效果速度。 \\
+    rotation\_intensity & float & × & 模型浮动时自旋速度。 \\
+    float\_intensity & float & × & 模型浮动强度。 \\
     create\_time & datetime & √ & 模型控制信息创建的时间。 \\
     update\_time & datetime & √ & 模型控制信息更新的时间。 \\
     \bottomrule
@@ -267,7 +267,7 @@
   \end{tabular}
 \end{table}
 
-学校人员表记录学生与教职工的信息，该表主要模拟学校的人员信息表，在实际使用中，系统需要对接的人员表字段要多于本表，本表只提供系统必要的字段。该表完整字段如表\ref{table:学校人员表}所示:
+学校人员表记录学生与教职工的信息，该表主要用于模拟学校的人员信息表。该表完整字段如表\ref{table:学校人员表}所示:
 
 \begin{table}[H]
   \centering
@@ -303,6 +303,8 @@
     \midrule
     id & bigint & √ & 主键，自增。 \\
     name & varchar(20) & √ & 用户昵称。 \\
+    password & varchar(20) & √ & 用户密码。 \\
+    email & varchar(50) & √ & 用户邮箱。 \\
     avatar\_url & varchar(255) & × & 用户头像 url。 \\
     sexual & Enum(`male', `female', `secret', `undefined') & √ & 用户性别。 \\
     permission & Enum(`student', `teacher', `admin', `visitor') & √ & 用户所属权限组。 \\ 
@@ -310,13 +312,14 @@
     department & varchar(255) & × & 用户所属部门，专业。 \\
     signature & varchar(255) & × & 用户个性签名。 \\
     tags & varchar(255) & × & 用户身份标签。 \\
+    ban & boolean & √ & 用户是否被封禁或注销。 \\
     create\_time & datetime & √ & 用户信息创建的时间。 \\
     update\_time & datetime & √ & 用户信息更新的时间。 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-用户收藏表用于记录用户与被收藏模型之间的关系。用于向用户提供快速访问收藏模型服务。该表完整字段如表\ref{table:用户收藏表}所示:
+用户收藏表用于记录用户与被收藏模型之间的关系。用户收藏表完整字段如表\ref{table:用户收藏表}所示:
 
 \begin{table}[H]
   \centering
@@ -362,13 +365,13 @@
 
 用户认证模块包含用户注册，用户登录，用户信息增改三个主要功能。
 
-系统将对重要数据进行加密存储与加密传输，在数据库中使用 AES 算法加密，在前后端传输过程中使用 RSA 双向加密算法加密。系统将先在前端进行数据检查，主要检查数据格式，权限。无误后再传输到后端进行查数据库匹配。
+在认证过程中，系统将先在前端检查数据，主要检查内容包括数据格式，用户权限等。无误后再执行后端逻辑。
 
-用户注册依赖于已有的学校人员信息表，仅匹配到对应的数据(id, 身份证号)后允许注册，并根据人员身份赋予对应的权限组。
+用户注册依赖于已有的学校人员信息表，仅匹配到对应的数据后允许注册，并根据人员身份赋予对应的权限组。
 
 整个用户认证模块涉及到的主要界面与所有数据表包括:
 \begin{itemize}
-  \item 界面: 登陆界面，注册界面，``我的''界面。
+  \item 界面: 登陆界面，注册界面，个人资料界面。
   \item 数据表: 学校人员表, 用户表, 用户收藏表, 用户关注表。
 \end{itemize}
 
@@ -388,11 +391,11 @@
           \mess{b}{要求重新输入数据}{user}
         \end{sdblock}
       \end{call}
-      \begin{call}{b}{RSA 加密传输数据}{s}{后端认证成功}
+      \begin{call}{b}{传输数据}{s}{后端认证成功}
         \postlevel
         \begin{call}{s}{\shortstack{查表: 用户表，\\学校人员表}}{mysql}{验证数据与权限}
         \end{call}
-        \begin{call}{s}{验证成功}{mysql}{AES 加密存储用户数据}
+        \begin{call}{s}{验证成功}{mysql}{存储用户数据}
         \end{call}
         \begin{sdblock}{Alt}{后端验证失败}
           \mess{s}{返回错误信息}{b}
@@ -409,14 +412,14 @@
 
 数据推送模块包括模型推送与模型查询两个主要功能。
 
-模型推送根据用户在``主页''界面的分区选择: ``为你推荐'', ``最新更新'', ``我的关注''。推送相关内容。三个分区对应后端三种不同的算法:
+模型推送根据用户在``主页''界面的分区选项(``为你推荐'', ``最新更新'', ``我的关注'')推送相关内容。三个分区对应后端三种不同的算法:
 \begin{itemize}
-  \item 为你推荐: 推送点赞数较高的模型。
+  \item 为你推荐: 推送最新创建的模型。
   \item 最新更新: 推送最新更新的模型。
   \item 我的关注: 推荐用户关注的用户发布的模型。
 \end{itemize}
 
-模型查询根据模型名称查询数据库字段并返回相应内容。整个数据推送模块涉及到的主要界面与所有数据表包括:
+模型查询根据用户输入的模型名称模糊匹配数据库字段并返回相应内容。整个数据推送模块涉及到的主要界面与所有数据表包括:
 \begin{itemize}
   \item 界面: ``首页'' 界面。
   \item 数据表: 模型表，用户表，模型点赞表，用户关注表，用户收藏表。
@@ -448,14 +451,14 @@
 
 \subsubsection{数据上传}
 
-数据上传模块包括模型上传与 ar 数据上传两个主要功能。
+数据上传模块包括模型上传功能。
 
-模型上传功能以 3D 模型为核心，目前仅支持 glb 格式的模型，且需要用户另行存储模型数据，系统通过 url 在前端获取模型。ar 数据上传以识别数据为核心，目前支持图像识别，patt 格式的标记捕捉。
+模型上传功能以 3D 模型为核心，上传模型文件，模型描述等，模型文件仅支持 glb 格式的模型，需要用户另行存储模型数据，系统通过 url 在前端获取模型。
 
 整个数据上传模块涉及到的主要界面与所有数据表包括:
 \begin{itemize}
   \item 界面: ``上传'' 界面。
-  \item 数据表: 标记表，标记信息表，模型表，模型控制表。
+  \item 数据表: 模型表，模型控制表。
 \end{itemize}
 
 数据上传模块整体操作的顺序图如图\ref{fig:数据上传顺序图} 所示:
@@ -476,7 +479,7 @@
       \end{call}
       \begin{call}{b}{传输数据}{s}{后端上传成功}
         \postlevel
-        \begin{call}{s}{\shortstack{操作表: 标记表，模型表，\\标记信息表，模型控制表}}{mysql}{操作完成}
+        \begin{call}{s}{\shortstack{操作表: 模型表，模型控制表}}{mysql}{操作完成}
         \end{call}
         \begin{sdblock}{Alt}{写入表失败}
           \mess{s}{返回错误信息}{b}
@@ -493,7 +496,7 @@
 
 系统的核心功能位于前端，这小节会详细说明前端各个组件之间如何协作完成核心功能，涉及到的组件包括:
 \begin{itemize}
-  \item @ar-js-org/ar.js: AR 功能核心组件，用于进行图象识别或标记捕捉，下文简称 ar.js
+  \item @ar-js-org/AR.js: AR 功能核心组件，用于进行图象识别或标记捕捉，下文简称 AR.js
   \item react: 前端主要框架。
   \item @reduxjs/toolkit: 状态管理组件，下文简称 redux。
   \item leva: 控制板交互组件，允许用户通过 UI 修改数据。
@@ -505,9 +508,9 @@
 
 \subsubsection{WebGL 模块}
 
-WebGL 模块能够显示三维物体，并且能通过触摸或修改控制板数据的方式操作三维物体与对应的环境。主要包括模型显示，模型操作功能。
+WebGL 模块主要功能是显示三维模型，且实现通过触摸或修改控制板数据的方式操作三维物体与对应的环境。主要包括模型显示，模型操作功能。
 
-系统在接受到模型数据后，会首先创建对应的界面，显示模型信息，在控制板中显示可操作的数据。由于模型数据较大，系统将异步请求模型数据。系统可通过悬浮按钮的诸多选项调整界面模式，例如: 屏蔽信息卡，关注于模型本身。
+系统在接受到模型数据后，会首先创建对应的界面，显示模型信息，在控制板中显示可操作的数据。由于模型数据较大，系统将异步请求模型数据。系统可通过悬浮按钮的诸多选项调整界面模式，例如: 屏蔽信息卡，开关提示卡。
 
 WebGL 模块被化拆分为如下具体功能模块:
 \begin{itemize}
@@ -569,13 +572,13 @@ WebGL 模块中前端各关键模块协作关系如图\ref{fig:WebGL 模块协�
 
 AR 模块在 WebGL 模块基础上引入 AR 功能，通过图像识别与标记捕捉的方法实时解析摄像头传输的图像信息并作出响应。主要包括场景预览与场景识别功能。
 
-系统在进入 AR 模块后，会首先获取摄像头权限并显示现实场景。在场景预览功能中，将虚拟物体投射到真实场景中，用户可以通过仪表盘或触摸操作调整模型。在场景识别功能中，系统会调用 ar.js 提供的识别功能捕捉图像信息，在成功捕捉到信息后，屏幕将会显示对应的 3D 模型或标记信息。
+系统在进入 AR 模块后，会首先获取摄像头权限并显示现实场景。在场景预览功能中，将虚拟物体投射到真实场景中，用户可以通过仪表盘或触摸操作调整模型。在场景识别功能中，系统会调用 AR.js 提供的识别功能捕捉图像信息，在成功捕捉到信息后，屏幕将会显示对应的 3D 模型或标记信息。
 
 AR 模块在 WebGL 模块基础上进行了以下修改:
 \begin{itemize}
   \item AR 网格模块: 允许用户通过控制板对模型进行缩放，旋转等操作。
-  \item AR 控制模块: 提供辅助坐标轴，允许用户触摸屏幕对模型进行缩放，旋转等操作。
-  \item AR 识别模块: 整合 ar.js 的识别功能。
+  \item AR 控制模块: 提供辅助坐标轴，允许用户通过触摸屏幕对模型进行缩放，旋转等操作。
+  \item AR 识别模块: 整合 AR.js 的识别功能。
 \end{itemize}
 
 AR 模块各关键模块协作关系如图\ref{fig:AR 模块协作关系}所示:

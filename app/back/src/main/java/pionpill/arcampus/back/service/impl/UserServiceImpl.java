@@ -22,7 +22,6 @@ import pionpill.arcampus.back.dao.repos.UserRepository;
 import pionpill.arcampus.back.dto.LoginDTO;
 import pionpill.arcampus.back.dto.RegistryDTO;
 import pionpill.arcampus.back.service.UserService;
-import pionpill.arcampus.back.utils.RSAUtils;
 import pionpill.arcampus.back.vo.RespBean;
 
 @Service
@@ -58,7 +57,7 @@ public class UserServiceImpl implements UserService {
     public RespBean registry(RegistryDTO registryDTO) {
         Long id = registryDTO.getId();
         String name = registryDTO.getName();
-        String password = RSAUtils.decrypt(registryDTO.getPassword());
+        String password = registryDTO.getPassword();
         String permission = registryDTO.getPermission();
         String email = registryDTO.getEmail();
         String avatarUrl = registryDTO.getAvatarUrl();
@@ -82,7 +81,7 @@ public class UserServiceImpl implements UserService {
         User newUser = User.builder().id(
                 id).name(name)
                 .password(password).permission(permission)
-                .email(email).avatarUrl(avatarUrl).createTime(createTime).updateTime(createTime).build();
+                .email(email).avatarUrl(avatarUrl).createTime(createTime).updateTime(createTime).ban(false).build();
         System.out.println(newUser);
         userRepository.save(newUser);
         return RespBean.success("注册成功!");

@@ -2,7 +2,7 @@
 \subsection{可行性分析}
 \subsubsection{技术可行性分析}
 
-本系统以 React 为整体框架，整合 three.js, ar.js 实现基于 WebGL 的 AR 交互功能。采用 fetch 技术获取后端数据以及图像识别和标记捕捉数据。整体上采用了信息系统的开发方法、网络和通信技术、数据库技术等，并且基于B/S结构规划技术和设计技术。本系统采用的绝大部分包均获得了应用级市场的认可，对于尚未广泛使用的 ar.js 包，本系统将其集成进 react 框架，成功实现了现实世界识别功能。综上，本系统开发技术是完全可行的。
+本系统以 React 为整体框架，整合 three.js、 AR.js 实现基于 WebGL 的 AR 交互功能。采用 fetch 技术获取后端数据以及图像识别和标记捕捉数据。整体上采用了信息系统的开发方法、网络和通信技术、数据库技术等，并且基于B/S结构规划技术和设计技术。本系统采用的绝大部分包均获得了应用级市场的认可，对于尚未广泛使用的 AR.js 包，本系统将其集成进 react 框架，用于实现场景识别功能。
 
 \subsubsection{经济可行性分析}
 
@@ -36,69 +36,9 @@
 
 \subsection{需求分析}
 
-软件工程实践正变得越来越重要，以减轻任何可能导致代价高昂的停机时间、不正确的行为或安全故障的失败风险。需求提取是系统地从人类利益相关者、系统环境、可行性研究、市场分析、商业计划、竞争产品分析和领域知识的组合中提取和识别系统需求的过程。\cite{jabar2012software}
+软件工程实践正变得越来越重要，以减轻任何可能导致代价高昂的停机时间、不正确的行为或安全故障的失败风险。需求提取是系统地从人类利益相关者、系统环境、可行性研究、市场分析、商业计划、竞争产品分析和领域知识的组合中提取和识别系统需求的过程\cite{jabar2012software}。
 
-\subsubsection{功能性需求分析}
-
-\begin{enumerate}
-  \item 登陆注册: 
-  
-  用户 id 必须与学号或工作编号一致，在注册时匹配校园编号表。用户身份分为四类: 游客，学生，老师，管理员。不同的身分将获得系统的不同权限以及推送内容。
-  \item 首页推送: 
-  
-  系统首页划分为``为你推荐'', ``最新更新'', ``我的关注''三个分区，分别获取推荐内容，最新内容以及关注内容。
-  \item 3D 模型展示: 
-  
-  系统建立 3D 模型展示环境，获取模型数据并在手机内直接展示。且提供模型背景，预设环境等可操作选项供用户预览。同时提供一定的模型文本信息，且用户可以在简略信息与详细信息模式直接切换，也可完全屏蔽模型信息。
-
-  \item 3D 模型 AR 预览:
-  
-  系统调用设备摄像头将模型放入到 AR 环境中，允许用户在现实环境中对模型进行移动缩放等操作，提供 3D 模型预览服务。
-
-  \item AR 场景识别:
-  
-  根据摄像头捕捉的图像信息，采用标记捕捉或图像识别算法，在捕捉到对应信息后显示相关三维模型以及对应文本信息。
-\end{enumerate}
-
-\subsubsection{非功能性需求分析}
-
-\begin{enumerate}
-  \item 性能
-  
-  性能指标可分为事件性能和空间性能。
-  \begin{itemize}
-    \item 时间性能: 本系统操作的持续时间不超过2秒，数据连接操作的持续时间不超过5秒。系统利用浏览器异步加载机制加载需要的资源，采用非阻塞算法逐步对场景，模型加载。如果由于网络问题，数据无法获取，系统应在等待至多 10 分钟后给出提示并恢复。
-    \item 空间性能: 本系统按需推送内容，在瀑布流中每次仅推送有限内容，根据用户操作增加推送内容。在 AR 场景识别过程中，根据用户地理位置推送必要数据。
-  \end{itemize}
-
-  \item 可靠性
-  
-  本系统测试时间不少于100小时。系统应避免因故障而引起的故障能力。在测试过程中，系统应尽可能经历所有可能出现的故障情况，以确保系统的成熟度。当硬件或软件出现异常时，系统仍应具有服务能力。业务容量减少，但不会导致系统崩溃。该系统应能在停机后十分钟内修复并正常运行。
-
-  \item 可用性
-
-  本系统在接收到用户输入的错误数据后，系统不会崩溃，系统能够识别错误并给用户相应的提示信息。系统界面美观，对用户具有吸引力。本系统的界面设计应在保证基本功能的基础上实现友好的布局，与市面上多数移动设备 app 界面操作保持一致。
-  
-  \item 易用性
-  
-  本系统易于学习。系统应确保操作逻辑符合常规 app 操作逻辑，新用户在第一次使用时，在3分钟的学习时间内了解整个系统的基本功能，在10分钟的学习时间内掌握系统的所有功能。AR交互系统的用户界面应该简单、直观，易于使用和导航。系统采用合适的配色、布局和图标来吸引用户的注意力，并使用户能够快速、准确地完成任务。
-
-  \item 安全性
-  
-  AR交互系统具有适当的安全措施，用户的隐私和数据安全。系统应该使用HTTPS协议来保护用户的数据传输，并提供强密码、双向加密验证等安全功能。前端仅对传输来的加密数据进行验证，非必要不保留。后端对重要数据进行加密保存。
-
-  \item 可维护性
-  
-  系统采用模块化设计。将系统拆分为多个独立的模块，每个模块处理特定的任务或功能。有助于提高系统的可维护性，开发人员可以更容易地定位和修复问题，并且在更新或升级时可以更轻松地进行更改。在系统设计和开发过程中，采用一致的编程规范和标准。确保代码的可读性和可维护性。使用版本控制工具（如Git）提高系统可维护性，可以协作开发和分支管理。
-
-  \item 可扩展性
-  
-  系统中的各个模块应该尽可能地松耦合，以避免修改一个模块对其他模块产生意外影响。这有助于确保系统的可拓展性和稳定性。在设计和开发过程中，使用广泛采用的标准和技术，以便将来可以轻松地添加新功能或集成其他系统。
-\end{enumerate}
-
-\subsection{系统模型}
-
-\subsubsection{用例图} 
+系统整体用例图如图\ref{fig:系统用例图}所示:
 
 \begin{figure}[H]
   \small
@@ -108,13 +48,19 @@
   \label{fig:系统用例图}
 \end{figure}
 
-\subsubsection{用例表} 
+
+\subsubsection{功能性需求分析}
+
+登陆注册: 用户 id 必须与学号或工作编号一致，在注册时匹配校园编号表。用户身份分为四类: 游客，学生，老师，管理员。游客账户为前端预留账户，用户可以通过该账户体验系统功能，但无法与后端进行交互。不同的身份将获得系统的不同权限以及推送内容。
+
+用户的登录步骤如表\ref{table:用户登录用例表}所示:
 
 \begin{table}[H]
   \centering
   \renewcommand\arraystretch{1.1}
   \small
   \caption{用户登录用例表}
+  \label{table:用户登录用例表}
   \setlength{\tabcolsep}{4mm}
   \begin{tabular}{|p{2cm}|p{5.75cm}|p{5.75cm}|}
     \hline \textbf{用例名} & \multicolumn{2}{l|}{用户登录} \\
@@ -132,11 +78,14 @@
   \end{tabular}
 \end{table}
 
+新用户注册时需选择对应的身份，例如学生，教师等。系统将通过校园用户表自动判断用户与选择的权限组是否对应，用户注册步骤如表\ref{table:用户注册用例表}所示:
+
 \begin{table}[H]
   \centering
   \renewcommand\arraystretch{1.1}
   \small
   \caption{用户注册用例表}
+  \label{table:用户注册用例表}
   \setlength{\tabcolsep}{4mm}
   \begin{tabular}{|p{2cm}|p{5.75cm}|p{5.75cm}|}
     \hline \textbf{用例名} & \multicolumn{2}{l|}{用户注册} \\
@@ -154,11 +103,14 @@
   \end{tabular}
 \end{table}
 
+在用户进入系统后，可在个人资料界面修改个人信息，修改用户信息步骤如表\ref{table:用户增改个人信息用例表}所示:
+
 \begin{table}[H]
   \centering
   \renewcommand\arraystretch{1.1}
   \small
   \caption{用户增改个人信息用例表}
+  \label{table:用户增改个人信息用例表}
   \setlength{\tabcolsep}{4mm}
   \begin{tabular}{|p{2cm}|p{5.75cm}|p{5.75cm}|}
     \hline \textbf{用例名} & \multicolumn{2}{l|}{用户增改个人信息} \\
@@ -176,57 +128,14 @@
   \end{tabular}
 \end{table}
 
-\begin{table}[H]
-  \centering
-  \renewcommand\arraystretch{1.1}
-  \small
-  \caption{用户上传模型用例表}
-  \setlength{\tabcolsep}{4mm}
-  \begin{tabular}{|p{2cm}|p{5.75cm}|p{5.75cm}|}
-    \hline \textbf{用例名} & \multicolumn{2}{l|}{用户上传模型} \\
-    \hline \textbf{角色} & \multicolumn{2}{l|}{管理员} \\
-    \hline \textbf{准入条件} & \multicolumn{2}{l|}{用户拥有管理员权限} \\
-    \hline \textbf{事件流} & \textbf{角色步骤} & \textbf{系统步骤} \\
-    \hline \multirow{3}{*}{~} & \textbf{1.} 用户进入上传界面，选择上传模型。  &    \\
-    \cline{2-3} & \textbf{2.} 用户输入模型URL，模型信息。 & \textbf{3:} 前端进行数据检查。 \\
-    \cline{2-3} &  & \textbf{4:} 后端检查是否有相同数据，返回检查结果。 \\
-    \cline{2-3} &  & \textbf{5:} 前端显示上传结果 \\
-    \cline{2-3} & \textbf{6:} 用户确认上传结果 & \textbf{7:} 前端退出上传界面 \\
-    \hline \textbf{退出条件}  & \multicolumn{2}{l|}{上传信息正确} \\
-    \hline \multirow{2}{*}{\textbf{例外}} & \multicolumn{2}{l|}{\textbf{1.} 步骤3，前端检查数据错误，给出提示信息。} \\
-     & \multicolumn{2}{l|}{\textbf{2.} 步骤4，后端保留数据失败，给出错误信息。} \\
-    \hline
-  \end{tabular}
-\end{table}
-
-\begin{table}[H]
-  \centering
-  \renewcommand\arraystretch{1.1}
-  \small
-  \caption{用户上传 AR 识别信息用例表}
-  \setlength{\tabcolsep}{4mm}
-  \begin{tabular}{|p{2cm}|p{5.75cm}|p{5.75cm}|}
-    \hline \textbf{用例名} & \multicolumn{2}{l|}{用户上传 AR 识别信息} \\
-    \hline \textbf{角色} & \multicolumn{2}{l|}{管理员} \\
-    \hline \textbf{准入条件} & \multicolumn{2}{l|}{用户拥有管理员权限} \\
-    \hline \textbf{事件流} & \textbf{角色步骤} & \textbf{系统步骤} \\
-    \hline \multirow{3}{*}{~} & \textbf{1.} 用户进入上传界面，选择上传 AR 识别信息。  &    \\
-    \cline{2-3} & \textbf{2.} 用户输入识别类型，识别图像URL，对应模型编号，相关信息。 & \textbf{3:} 前端进行数据检查。 \\
-    \cline{2-3} &  & \textbf{4:} 后端检查是否有相同数据，返回检查结果。 \\
-    \cline{2-3} &  & \textbf{5:} 前端显示上传结果 \\
-    \cline{2-3} & \textbf{6:} 用户确认上传结果 & \textbf{7:} 前端退出上传界面 \\
-    \hline \textbf{退出条件}  & \multicolumn{2}{l|}{上传信息正确} \\
-    \hline \multirow{2}{*}{\textbf{例外}} & \multicolumn{2}{l|}{\textbf{1.} 步骤3，前端检查数据错误，给出提示信息。} \\
-     & \multicolumn{2}{l|}{\textbf{2.} 步骤4，后端保留数据失败，给出错误信息。} \\
-    \hline
-  \end{tabular}
-\end{table}
+首页推送: 系统首页划分为``为你推荐''、``最新更新''、 ``我的关注''三个分区，分别获取推荐内容，最新内容以及关注内容。用户选择不同分区时，系统将自动调用后端算法推送内容。首页推送功能执行步骤如表\ref{table:首页推送用例表}所示:
 
 \begin{table}[H]
   \centering
   \renewcommand\arraystretch{1.1}
   \small
   \caption{首页推送用例表}
+  \label{table:首页推送用例表}
   \setlength{\tabcolsep}{4mm}
   \begin{tabular}{|p{2cm}|p{5.75cm}|p{5.75cm}|}
     \hline \textbf{用例名} & \multicolumn{2}{l|}{首页推送} \\
@@ -243,11 +152,14 @@
   \end{tabular}
 \end{table}
 
+用户在首页也可自行查询相关内容，搜索栏支持按模型名称查询功能，系统后端返回结果后，前端会替换原先内容显示搜索的结果，首页查询功能的执行步骤如表\ref{table:首页查询用例表}所示:
+
 \begin{table}[H]
   \centering
   \renewcommand\arraystretch{1.1}
   \small
   \caption{首页查询用例表}
+  \label{table:首页查询用例表}
   \setlength{\tabcolsep}{4mm}
   \begin{tabular}{|p{2cm}|p{5.75cm}|p{5.75cm}|}
     \hline \textbf{用例名} & \multicolumn{2}{l|}{首页查询} \\
@@ -265,11 +177,14 @@
   \end{tabular}
 \end{table}
 
+3D 模型展示: 系统建立 3D 模型并展示环境，获取模型数据并在手机内直接展示，且提供模型背景，预设环境等可操作选项供用户预览。同时提供一定的模型文本信息，用户可以在简略信息与详细信息模式直接切换，也可完全屏蔽模型信息。模型展示功能的执行步骤如表\ref{table:模型展示用例表}所示:
+
 \begin{table}[H]
   \centering
   \renewcommand\arraystretch{1.1}
   \small
   \caption{模型展示用例表}
+  \label{table:模型展示用例表}
   \setlength{\tabcolsep}{4mm}
   \begin{tabular}{|p{2cm}|p{5.75cm}|p{5.75cm}|}
     \hline \textbf{用例名} & \multicolumn{2}{l|}{模型展示} \\
@@ -288,11 +203,15 @@
   \end{tabular}
 \end{table}
 
+
+3D 模型 AR 预览:系统调用设备摄像头将模型放入到 AR 环境中，允许用户在现实环境中对模型进行移动缩放等操作，提供 3D 模型预览服务。AR 预览功能的执行步骤如表\ref{table:AR 预览用例表}所示:
+
 \begin{table}[H]
   \centering
   \renewcommand\arraystretch{1.1}
   \small
   \caption{AR 预览用例表}
+  \label{table:AR 预览用例表}
   \setlength{\tabcolsep}{4mm}
   \begin{tabular}{|p{2cm}|p{5.75cm}|p{5.75cm}|}
     \hline \textbf{用例名} & \multicolumn{2}{l|}{AR 预览} \\
@@ -313,11 +232,14 @@
   \end{tabular}
 \end{table}
 
+AR 场景识别:根据摄像头捕捉的图像信息，采用标记捕捉或图像识别算法，在捕捉到对应信息后显示相关三维模型以及对应文本信息。AR 识别功能的执行步骤如表\ref{table:AR 识别用例表}所示:
+
 \begin{table}[H]
   \centering
   \renewcommand\arraystretch{1.1}
   \small
   \caption{AR 识别用例表}
+  \label{table:AR 识别用例表}
   \setlength{\tabcolsep}{4mm}
   \begin{tabular}{|p{2cm}|p{5.75cm}|p{5.75cm}|}
     \hline \textbf{用例名} & \multicolumn{2}{l|}{AR 识别} \\
@@ -337,4 +259,40 @@
   \end{tabular}
 \end{table}
 
-(3) 类图
+\subsubsection{非功能性需求分析}
+
+系统非功能性需求分析确保系统在满足功能需求的同时，也满足了非功能性需求，如性能、可靠性、安全性、可维护性等。确保满足非功能性需求可以有效保证软件稳定性、扩展性\cite{张宏升2011软件架构的非功能性需求指标和区域化支持}。
+
+\begin{enumerate}
+  \item 性能
+  
+  性能指标可分为时间性能和空间性能。
+  \begin{itemize}
+    \item 时间性能: 本系统操作的持续时间不超过2秒，数据连接操作的持续时间不超过5秒。系统利用浏览器异步加载机制加载需要的资源，采用非阻塞机制逐步对场景，模型加载。如果由于网络问题，数据无法获取，系统应在等待至多 10 分钟后给出提示并恢复。
+    \item 空间性能: 本系统按需推送内容，在界面中每次仅推送有限内容，根据用户操作增加推送内容。在 AR 场景识别过程中，根据用户地理位置推送必要数据。
+  \end{itemize}
+
+  \item 可靠性
+  
+  本系统测试时间不少于20小时。在测试过程中，系统应尽可能经历所有可能出现的故障情况，以确保系统的成熟度。当硬件或软件出现异常时，系统仍应具有服务能力。业务容量减少，但不会导致系统崩溃。该系统应能在停机后十分钟内修复并正常运行。
+
+  \item 可用性
+
+  本系统在接收到用户输入的错误数据后，系统不会崩溃，系统能够识别错误并给用户相应的提示信息。系统界面美观，对用户具有吸引力。本系统的界面设计应在保证基本功能的基础上实现友好的布局，与市面上多数移动设备 app 界面操作保持一致。
+  
+  \item 易用性
+  
+  本系统易于学习。系统应确保操作逻辑符合常规 app 操作逻辑，新用户在第一次使用时，在3分钟的学习时间内了解整个系统的基本功能，在10分钟的学习时间内掌握系统的所有功能。AR交互系统的用户界面应该简单、直观、易于使用。系统采用合适的配色、布局和图标来吸引用户的注意力，并使用户能够快速、准确地完成任务。
+
+  \item 安全性
+  
+  AR交互系统具有适当的安全措施，用户的隐私和数据安全。系统应该使用HTTPS协议来保护用户的数据传输。前端仅保留必要数据。后端对重要数据进行加密保存。
+
+  \item 可维护性
+  
+  系统采用模块化设计。将系统拆分为多个独立的模块，每个模块处理特定的任务或功能。有助于提高系统的可维护性，开发人员可以更容易地定位和修复问题，并且在更新或升级时可以更轻松地进行更改。在系统设计和开发过程中，采用一致的编程规范和标准，确保代码的可读性和可维护性。使用版本控制工具（Git）提高系统可维护性。
+
+  \item 可扩展性
+  
+  系统中的各个模块应该尽可能地松耦合，以避免修改一个模块对其他模块产生意外影响。这有助于确保系统的可拓展性和稳定性。在设计和开发过程中，使用广泛采用的标准和技术，以便将来可以轻松地添加新功能或集成其他系统。
+\end{enumerate}

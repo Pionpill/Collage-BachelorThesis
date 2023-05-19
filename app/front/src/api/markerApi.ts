@@ -14,6 +14,18 @@ export type MarkerApiType = {
   updateTime: String;
 };
 
+export type MarkerInfoApiType = {
+  abstractInfo: string;
+  detailInfo: string;
+  authorId: number;
+  coverUrl: string;
+  createTime: string;
+  id: number;
+  location?: string;
+  title: string;
+  updateTime: string;
+};
+
 export const getMarkersByGeoApi = async (lon: number, lat: number) => {
   return fetch(`${backUrl}/marker/geo?lon=${lon}&lat=${lat}`, {
     method: "GET",

@@ -149,7 +149,6 @@ const ContentFlow: React.FC = () => {
     }
     if (promise) data = (await (await promise).json()).data;
     const modelsArray = await modelAdapter(data);
-    // return modelsArray;
     setModels(modelsArray);
   };
 

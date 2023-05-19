@@ -26,9 +26,6 @@ export const ARProvider: ARProviderProps = ({
   children,
   sourceProps,
   contextProps,
-  // matrixCodeType,
-  // detectionMode,
-  // cameraParametersUrl,
   onCameraStreamReady,
   onCameraStreamError,
 }) => {
