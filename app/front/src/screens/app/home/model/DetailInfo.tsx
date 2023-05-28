@@ -67,7 +67,7 @@ const DetailInfo: React.FC<{ model: ThreeModel }> = ({ model }) => {
       setSubscribe(response.data);
     });
   };
-  React.useState(() => {
+  React.useEffect(() => {
     setLikeCondition();
     setCollectCondition();
     setSubscribeCondition();

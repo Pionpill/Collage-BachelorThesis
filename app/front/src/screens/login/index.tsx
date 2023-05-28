@@ -132,6 +132,12 @@ const SignIn: React.FC = () => {
 };
 
 const Login: React.FC = () => {
+  const dispatch = useDispatch();
+  const loginAsVisitor = () => {
+    dispatch(changeAccountInfo({ userId: "visitor" }));
+    localStorage.clear();
+  };
+
   return (
     <MainContainer>
       <FlexBox column sx={{ height: "100vh" }}>
@@ -149,6 +155,7 @@ const Login: React.FC = () => {
               fullWidth
               variant="outlined"
               component={Link}
+              onClick={loginAsVisitor}
               to="/app/account"
             >
               以游客身份登录

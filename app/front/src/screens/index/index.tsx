@@ -1,11 +1,18 @@
 import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import FlexBox from "../../components/FlexBox";
 import MainContainer from "../../components/MainContainer";
+import { changeAccountInfo } from "../../store/features/accountSlice";
 import TestScene from "./TestScene";
 
 const Index: React.FC = () => {
+  const dispatch = useDispatch();
+  const loginAsVisitor = () => {
+    dispatch(changeAccountInfo({ userId: "visitor" }));
+    localStorage.clear();
+  };
   return (
     <MainContainer>
       <FlexBox column sx={{ height: "100vh" }}>
@@ -27,13 +34,23 @@ const Index: React.FC = () => {
           WebGL 的浏览器。
         </Typography>
         <FlexBox fullWidth column gap={2} mt={10}>
+          <Typography
+            variant="caption"
+            align="center"
+            color="text.secondary"
+            mt={2}
+          >
+            请使用手机访问 (没做响应式 =A=)
+          </Typography>
           <Button component={Link} to="/login" variant="contained" fullWidth>
             登录
           </Button>
           <Button component={Link} to="/registry" variant="outlined" fullWidth>
             注册
           </Button>
-          <Button fullWidth>游客登录</Button>
+          <Button fullWidth onClick={loginAsVisitor}>
+            游客登录
+          </Button>
         </FlexBox>
       </FlexBox>
     </MainContainer>

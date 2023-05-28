@@ -1,1 +1,1 @@
-export const backUrl = `http://192.168.127.251:8080`;
+export const backUrl = `http://localhost:8080`;

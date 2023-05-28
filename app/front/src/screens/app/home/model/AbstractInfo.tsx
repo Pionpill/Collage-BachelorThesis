@@ -75,9 +75,14 @@ const AbstractInfo: React.FC<{ model: ThreeModel }> = ({ model }) => {
       setCollect(true);
     }
   };
-  React.useState(() => {
-    setLikeCondition();
-    setCollectCondition();
+  React.useEffect(() => {
+    if (userId === "visitor") {
+      setLike(true);
+      setCollect(true);
+    } else {
+      setLikeCondition();
+      setCollectCondition();
+    }
   });
   return (
     <AbstractCard sx={{ visibility: isPureModel ? "hidden" : "visible" }}>
